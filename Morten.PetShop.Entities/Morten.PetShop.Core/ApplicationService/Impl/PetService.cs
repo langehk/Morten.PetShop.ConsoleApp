@@ -1,29 +1,91 @@
 ﻿using System;
 using System.Collections.Generic;
-using Morten.PetShop.Entities;
-using Morten.PetShop.Core.DomainService;
 using System.Linq;
 using System.Text;
+using Morten.PetShop.Core.DomainService;
+using Morten.PetShop.Entities;
 
 namespace Morten.PetShop.Core.ApplicationService.Implementation
 {
     public class PetService : IPetService
     {
-        private readonly IPetRepository _petRepository;
+        readonly IPetRepository _petRepo;
 
         public PetService(IPetRepository petRepository)
         {
-            _petRepository = petRepository;
+            _petRepo = petRepository;
         }
 
-        public List<Pet> GetPets()
+        public Pet NewPet(string name, string type, DateTime birthDate, DateTime soldDate, string color, string previousOwner, double price)
         {
-            return _petRepository.ReadPets().ToList();
+            var pet = new Pet
+            {
+                Name = name,
+                Type = type,
+                BirthDate = birthDate,
+                SoldDate = soldDate,
+                Color = color,
+                PreviousOwner = previousOwner,
+                Price = price
+            };
+            return pet;
+        }
+        //Create
+        public Pet CreatePet(Pet p)
+        {
+            return _petRepo.Create(p);
+        }
+        //Read
+        public List<Pet> GetAllPets()
+        {
+            return _petRepo.ReadAll().ToList();
+        }
+        //Read
+        public Pet FindPetById(int id)
+        {
+            return _petRepo.ReadById(id);
+        }
+        //Read
+        public List<Pet> FindPetByType(string searchValue)
+        {
+            var list = _petRepo.ReadAll();
+            var queryCont = list.Where(pet => pet.Type.Equals(searchValue));
+            queryCont.OrderBy(pet => pet.Type);
+            return queryCont.ToList();
+        }
+        //Read
+        public List<Pet> SortByPrice()
+        {
+            throw new NotImplementedException();
+        }
+        //Read
+        public List<Pet> GetFiveCheapest()
+        {
+            throw new NotImplementedException();
+        }
+        //update
+        public Pet UpdatePet(Pet petUpdate)
+        {
+            var pet = FindPetById(petUpdate.Id);
+
+            pet.Name = petUpdate.Name;
+            pet.Type = petUpdate.Type;
+            pet.BirthDate = petUpdate.BirthDate;
+            pet.SoldDate = petUpdate.SoldDate;
+            pet.Color = petUpdate.Color;
+            pet.PreviousOwner = petUpdate.PreviousOwner;
+            pet.Price = petUpdate.Price;
+
+            return pet;
+        }
+        //Delete
+        public Pet DeletePet(int iDForDelete)
+        {
+            return _petRepo.delete(iDForDelete);
         }
 
-        //List<Pet> IPetService.GetPets()
-        //{
-        //    return _petRepository.ReadPets().ToList();
-        //}
+
     }
+
+    
 }

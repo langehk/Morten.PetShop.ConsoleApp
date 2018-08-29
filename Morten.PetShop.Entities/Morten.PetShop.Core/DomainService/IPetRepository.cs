@@ -7,7 +7,15 @@ namespace Morten.PetShop.Core.DomainService
 {
     public interface IPetRepository
     {
-        IEnumerable<Pet> ReadPets();
+        Pet Create(Pet pet);
+
+        Pet ReadById(int id);
+
+        IEnumerable<Pet> ReadAll();
+
+        Pet Update(Pet petUpdate);
+
+        Pet delete(int id);
 
     }
 }
