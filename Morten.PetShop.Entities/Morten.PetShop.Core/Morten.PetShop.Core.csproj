@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ApplicationService\" />
+    <Folder Include="ApplicationService\Impl\" />
+    <Folder Include="DomainService\" />
+    <Folder Include="DomainService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Morten.PetShop.Entities.csproj" />
+  </ItemGroup>
+</Project>
