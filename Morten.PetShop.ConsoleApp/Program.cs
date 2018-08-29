@@ -9,26 +9,23 @@ using Morten.PetShop.Infrastructure.Data;
 
 namespace Morten.PetShop.ConsoleApp
 {
-    public class Program
+    class Program
     {
+        
 
-        static void Main(String[] args)
+
+        static void Main(string[] args)
         {
-            FakeDB.InitData();
-
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddScoped<IPetRepository, PetRepository>();
             serviceCollection.AddScoped<IPetService, PetService>();
+            serviceCollection.AddScoped<IPetRepository, PetRepository>();
+            serviceCollection.AddScoped<IPrinter, Printer>();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            var petService = serviceProvider.GetRequiredService<IPetService>();
-            new Printer(petService);
-
-            Console.ReadLine();
-
-
-
-
+            var printer = serviceProvider.GetRequiredService<IPrinter>();
+            printer.StartUI();
         }
+
+
     }
 }

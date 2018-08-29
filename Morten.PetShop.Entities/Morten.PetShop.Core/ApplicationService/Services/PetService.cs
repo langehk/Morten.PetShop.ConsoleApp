@@ -5,7 +5,7 @@ using System.Text;
 using Morten.PetShop.Core.DomainService;
 using Morten.PetShop.Entities;
 
-namespace Morten.PetShop.Core.ApplicationService.Implementation
+namespace Morten.PetShop.Core.ApplicationService.Services
 {
     public class PetService : IPetService
     {
