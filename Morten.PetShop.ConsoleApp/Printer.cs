@@ -124,9 +124,16 @@ namespace EASV.PetShop.ConsoleApp
                         });
                         break;
 
-                        // Sort after price
+                        // Sort after price "Lowest first"
                     case 6:
-                        Console.WriteLine("");
+                        var sortResult = _petService.SortByprice();
+
+                        foreach (var sortPet in sortResult)
+                        {
+                            Console.WriteLine($"Id: {sortPet.Id} Name: { sortPet.Name}  Type: {sortPet.Type} BirthDate: {sortPet.BirthDate} SoldDate: {sortPet.SoldDate} Color: {sortPet.Color} PreviousOwner: {sortPet.PreviousOwner} Price: {sortPet.Price}");
+                        }
+                    
+
                         break;
 
                         //Find the 5 cheapest
@@ -184,10 +191,6 @@ namespace EASV.PetShop.ConsoleApp
 
             };
             _petService.CreatePet(pet3);
-
-
-
-
         }
 
         int PrintFindPetById()

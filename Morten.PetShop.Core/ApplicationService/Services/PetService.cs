@@ -54,16 +54,13 @@ namespace EASV.PetShop.Core.ApplicationService.Services
             return queryCont.ToList();
         }
      
-        public List<Pet> SortByPrice()
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Pet> GetFiveCheapest()
         {
             throw new NotImplementedException();
         }
-    
+    /*
+     * Update pet
+     */ 
         public Pet UpdatePet(Pet petUpdate)
         {
             var pet = FindPetById(petUpdate.Id);
@@ -90,13 +87,15 @@ namespace EASV.PetShop.Core.ApplicationService.Services
             return _petRepo.delete(iDForDelete);
         }
 
+
+        //Sort list of pets by price.
         public List<Pet> SortByprice()
         {
-            throw new NotImplementedException();
+            var list = _petRepo.ReadAll();
+            var query = list.OrderBy(Pet => Pet.Price);
+            return query.ToList();
         }
 
        
     }
-
-    
 }
