@@ -132,13 +132,11 @@ namespace EASV.PetShop.ConsoleApp
                         {
                             Console.WriteLine($"Id: {sortPet.Id} Name: { sortPet.Name}  Type: {sortPet.Type} BirthDate: {sortPet.BirthDate} SoldDate: {sortPet.SoldDate} Color: {sortPet.Color} PreviousOwner: {sortPet.PreviousOwner} Price: {sortPet.Price}");
                         }
-                    
-
                         break;
 
                         //Find the 5 cheapest
                     case 7:
-                        
+                        GetFiveCheapestCars();
                         break;
                     default:
                         break;
@@ -149,6 +147,15 @@ namespace EASV.PetShop.ConsoleApp
 
 
             Console.ReadLine();
+        }
+
+        private void GetFiveCheapestCars()
+        {
+            var list = _petService.GetFiveCheapest();
+            foreach (var pet in list)
+            {
+                Console.WriteLine("Price: {1:N}", pet.Price);
+            }
         }
 
         private void StartData()
@@ -191,6 +198,45 @@ namespace EASV.PetShop.ConsoleApp
 
             };
             _petService.CreatePet(pet3);
+
+            var pet4 = new Pet()
+            {
+                Name = "Allan",
+                Type = "Hund",
+                BirthDate = new DateTime(2013, 05, 08),
+                SoldDate = new DateTime(2019, 05, 09),
+                Color = "Gul",
+                PreviousOwner = "Ole",
+                Price = 2345
+
+            };
+            _petService.CreatePet(pet4);
+
+            var pet5 = new Pet()
+            {
+                Name = "Allan",
+                Type = "Hund",
+                BirthDate = new DateTime(2013, 05, 08),
+                SoldDate = new DateTime(2019, 05, 09),
+                Color = "Gul",
+                PreviousOwner = "Ole",
+                Price = 3333
+
+            };
+            _petService.CreatePet(pet5);
+
+            var pet6 = new Pet()
+            {
+                Name = "Allan",
+                Type = "Hund",
+                BirthDate = new DateTime(2013, 05, 08),
+                SoldDate = new DateTime(2019, 05, 09),
+                Color = "Gul",
+                PreviousOwner = "Ole",
+                Price = 9999
+
+            };
+            _petService.CreatePet(pet6);
         }
 
         int PrintFindPetById()

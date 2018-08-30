@@ -54,9 +54,17 @@ namespace EASV.PetShop.Core.ApplicationService.Services
             return queryCont.ToList();
         }
      
+
+        /*
+         * Sortere ud fra 5 billigeste
+         */
         public List<Pet> GetFiveCheapest()
         {
-            throw new NotImplementedException();
+            var listQuery = _petRepo.ReadAll();
+            listQuery.OrderBy(pet => pet.Price);
+                                                 // Forskellige ting man kan sortere efter, ud fra et query.
+                    
+            return listQuery.Take(5).ToList();   //DET ER HER MAN EXECUTER SIN QUERY.
         }
     /*
      * Update pet
@@ -88,7 +96,7 @@ namespace EASV.PetShop.Core.ApplicationService.Services
         }
 
 
-        //Sort list of pets by price.
+        //Sort list of pets by price
         public List<Pet> SortByprice()
         {
             var list = _petRepo.ReadAll();
