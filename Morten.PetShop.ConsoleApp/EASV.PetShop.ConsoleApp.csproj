@@ -9,8 +9,8 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Morten.PetShop.Entities\Morten.PetShop.Core\Morten.PetShop.Core.csproj" />
-    <ProjectReference Include="..\Morten.PetShop.Entities\Morten.PetShop.Entities.csproj" />
-    <ProjectReference Include="..\PetRepository\Morten.PetShop.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\PetRepository\EASV.PetShop.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\Morten.PetShop.Core\EASV.PetShop.Core.csproj" />
+    <ProjectReference Include="..\Morten.PetShop.Entities\EASV.PetShop.Entities.csproj" />
   </ItemGroup>
 </Project>

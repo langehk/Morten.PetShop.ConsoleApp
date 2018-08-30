@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Morten.PetShop.Entities;
+using EASV.PetShop.Entities;
 
-namespace Morten.PetShop.Core.DomainService
+namespace EASV.PetShop.Core.DomainService
 {
     public interface IPetRepository
     {

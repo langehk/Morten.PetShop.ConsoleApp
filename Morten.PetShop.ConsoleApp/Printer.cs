@@ -1,9 +1,10 @@
 ﻿using System;
-using Morten.PetShop.Core.ApplicationService;
-using System.Collections.Generic;
-using Morten.PetShop.Entities;
 
-namespace Morten.PetShop.ConsoleApp
+using System.Collections.Generic;
+using EASV.PetShop.Core.ApplicationService;
+using EASV.PetShop.Entities;
+
+namespace EASV.PetShop.ConsoleApp
 {
     public class Printer : IPrinter
     {
@@ -182,19 +183,19 @@ namespace Morten.PetShop.ConsoleApp
         //UI
         public static int PetMenu(string[] menuEnhender)
         {
-            Console.WriteLine("Skriv et tal for at vælge: \n");
+            Console.WriteLine("Type a number: \n");
 
             for (int i = 0; i < menuEnhender.Length; i++)
             {
                 Console.WriteLine((i + 1) + ": " + menuEnhender[i]);
             }
-            int valg;
-            while (!int.TryParse(Console.ReadLine(), out valg) || valg < 1 || valg > 8)
+            int selection;
+            while (!int.TryParse(Console.ReadLine(), out selection) || selection < 1 || selection > 8)
             {
-                Console.WriteLine("Det ikke et tal på listen");
+                Console.WriteLine("That's not a valid number");
             }
-            Console.WriteLine("Valg: " + valg);
-            return valg;
+            Console.WriteLine("selection: " + selection);
+            return selection;
 
         }
     }

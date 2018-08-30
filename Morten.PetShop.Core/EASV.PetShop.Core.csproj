@@ -13,6 +13,6 @@
     <Compile Remove="Class1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Morten.PetShop.Entities\Morten.PetShop.Entities.csproj" />
+    <ProjectReference Include="..\Morten.PetShop.Entities\EASV.PetShop.Entities.csproj" />
   </ItemGroup>
 </Project>

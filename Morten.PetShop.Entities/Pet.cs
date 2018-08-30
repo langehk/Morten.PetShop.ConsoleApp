@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Morten.PetShop.Entities
+namespace EASV.PetShop.Entities
 {
     public class Pet
     {

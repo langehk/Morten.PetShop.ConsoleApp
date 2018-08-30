@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Morten.PetShop.ConsoleApp
+namespace EASV.PetShop.ConsoleApp
 {
     public interface IPrinter
     {

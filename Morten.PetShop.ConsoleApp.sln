@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Morten.PetShop.ConsoleApp", "Morten.PetShop.ConsoleApp\Morten.PetShop.ConsoleApp.csproj", "{314A99EB-C722-45DF-A389-D0E5CB4C6FAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EASV.PetShop.ConsoleApp", "Morten.PetShop.ConsoleApp\EASV.PetShop.ConsoleApp.csproj", "{314A99EB-C722-45DF-A389-D0E5CB4C6FAC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D6471564-456A-42F6-AA88-2EEEB5F431FE}"
 EndProject
@@ -9,11 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{878B8A6E-457F-4F76-B7F8-E049AB1AF6E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Morten.PetShop.Infrastructure.Data", "PetRepository\Morten.PetShop.Infrastructure.Data.csproj", "{7701A465-1F17-44E8-8457-50C49BD846F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EASV.PetShop.Infrastructure.Data", "PetRepository\EASV.PetShop.Infrastructure.Data.csproj", "{7701A465-1F17-44E8-8457-50C49BD846F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Morten.PetShop.Entities", "Morten.PetShop.Entities\Morten.PetShop.Entities.csproj", "{2BD39C3D-AFF7-40B6-99A6-4A1D1E87DD90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EASV.PetShop.Entities", "Morten.PetShop.Entities\EASV.PetShop.Entities.csproj", "{2BD39C3D-AFF7-40B6-99A6-4A1D1E87DD90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Morten.PetShop.Core", "Morten.PetShop.Core\Morten.PetShop.Core.csproj", "{3F107B50-60C2-405F-9750-EE843005187D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EASV.PetShop.Core", "Morten.PetShop.Core\EASV.PetShop.Core.csproj", "{3F107B50-60C2-405F-9750-EE843005187D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

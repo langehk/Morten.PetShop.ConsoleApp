@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
+using EASV.PetShop.Core.DomainService;
+using EASV.PetShop.Entities;
 
-using Morten.PetShop.Entities;
-using Morten.PetShop.Core.DomainService;
-
-namespace Morten.PetShop.Infrastructure.Data
+namespace EASV.PetShop.Infrastructure.Data
 {
     public class PetRepository : IPetRepository
     {
@@ -61,6 +60,24 @@ namespace Morten.PetShop.Infrastructure.Data
                 return petFundet;
             }
             return null;
+        }
+
+
+        Pet IPetRepository.ReadById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        IEnumerable<Pet> IPetRepository.ReadAll()
+        {
+            throw new System.NotImplementedException();
+        }
+
+
+
+        Pet IPetRepository.delete(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

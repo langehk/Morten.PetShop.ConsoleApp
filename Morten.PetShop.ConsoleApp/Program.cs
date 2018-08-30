@@ -1,13 +1,14 @@
 ﻿using System;
 
 using System.Linq;
+using EASV.PetShop.Core.ApplicationService;
+using EASV.PetShop.Core.ApplicationService.Services;
+using EASV.PetShop.Core.DomainService;
+using EASV.PetShop.Infrastructure.Data;
 using Microsoft.Extensions.DependencyInjection;
-using Morten.PetShop.Core.ApplicationService.Services;
-using Morten.PetShop.Core.DomainService;
-using Morten.PetShop.Core.ApplicationService;
-using Morten.PetShop.Infrastructure.Data;
 
-namespace Morten.PetShop.ConsoleApp
+
+namespace EASV.PetShop.ConsoleApp
 {
     class Program
     {
