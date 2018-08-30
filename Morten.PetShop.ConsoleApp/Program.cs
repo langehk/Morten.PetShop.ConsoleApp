@@ -2,9 +2,9 @@
 
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
-using Morten.PetShop.Core.ApplicationService;
-using Morten.PetShop.Core.ApplicationService.Implementation;
+using Morten.PetShop.Core.ApplicationService.Services;
 using Morten.PetShop.Core.DomainService;
+using Morten.PetShop.Core.ApplicationService;
 using Morten.PetShop.Infrastructure.Data;
 
 namespace Morten.PetShop.ConsoleApp
@@ -12,8 +12,6 @@ namespace Morten.PetShop.ConsoleApp
     class Program
     {
         
-
-
         static void Main(string[] args)
         {
             var serviceCollection = new ServiceCollection();

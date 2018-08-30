@@ -1,7 +1,6 @@
 ﻿using System;
 using Morten.PetShop.Core.ApplicationService;
 using System.Collections.Generic;
-using System.Text;
 using Morten.PetShop.Entities;
 
 namespace Morten.PetShop.ConsoleApp
@@ -16,10 +15,7 @@ namespace Morten.PetShop.ConsoleApp
             
 
             StartData();
-            
-
         }
-
         
         public void StartUI()
         {
@@ -52,31 +48,55 @@ namespace Morten.PetShop.ConsoleApp
                         break;
                     case 3:
                         var name = AskQuestion("Name: ");
+
                         var type = AskQuestion("Type: ");
+
                         var birthDate = AskQuestion("Birthdate: ");
+
                         var soldDate = AskQuestion("Solddate: ");
+
                         var color = AskQuestion("Color: ");
+
                         var previousOwner = AskQuestion("Previous owner: ");
+
                         var price = AskQuestion("Price: ");
-                        var pet = _petService.NewPet(name, type, Convert.ToDateTime(birthDate),
-                                            Convert.ToDateTime(soldDate), color,
-                                                     previousOwner, Convert.ToDouble(price));
+
+                        var pet = _petService.NewPet
+                                             (name, 
+                                              type, 
+                                              Convert.ToDateTime(birthDate),
+                                              Convert.ToDateTime(soldDate), 
+                                              color,
+                                              previousOwner, 
+                                              Convert.ToDouble(price));
+                        
                         _petService.CreatePet(pet);
                         break;
+
                     case 4:
                         var iDForDelete = PrintFindPetById();
                         _petService.DeletePet(iDForDelete);
                         break;
+
                     case 5:
                         var idForEdit = PrintFindPetById();
+
                         var petToEdit = _petService.FindPetById(idForEdit);
+
                         var newName = AskQuestion("Name: ");
+
                         var newType = AskQuestion("Type: ");
+
                         var newBirthDate = AskQuestion("Birthdate: ");
+
                         var newSoldDate = AskQuestion("Solddate: ");
+
                         var newColor = AskQuestion("Color: ");
+
                         var newPreviousOwner = AskQuestion("Previous owner: ");
+
                         var newPrice = AskQuestion("Price: ");
+
                         _petService.UpdatePet(new Pet()
                         {
                             Id = idForEdit,
@@ -110,65 +130,33 @@ namespace Morten.PetShop.ConsoleApp
         {
             var pet1 = new Pet()
             {
-                Name = "Pjuske",
-                Type = "Hund",
-                Birthdate = new DateTime(2018, 08, 08),
-                SoldDate = new DateTime(2019, 09, 09),
-                Color = "Brun",
-                PrevOwner = "Lars",
-                Price = 2000.00
+                Name = "pip",
+                Type = "Fugl",
+                BirthDate = new DateTime(2013, 05, 08),
+                SoldDate = new DateTime(2019, 05, 09),
+                Color = "grøn",
+                PreviousOwner = "Brian",
+                Price = 3500
 
             };
             _petService.CreatePet(pet1);
-            var pet2 = new Pet()
-            {
-                Name = "JohnBob",
-                Type = "Kat",
-                Birthdate = new DateTime(2018, 08, 08),
-                SoldDate = new DateTime(2019, 09, 09),
-                Color = "Hvid",
-                PrevOwner = "John",
-                Price = 150.00
-            };
-            _petService.CreatePet(pet2);
-            var pet3 = new Pet()
-            {
-                Name = "Ib",
-                Type = "Gås",
-                Birthdate = new DateTime(2018, 08, 08),
-                SoldDate = new DateTime(2019, 09, 09),
-                Color = "Grå",
-                PrevOwner = "Karl",
-                Price = 350.00
-            };
-            _petService.CreatePet(pet3);
-            var pet4 = new Pet()
-            {
-                Name = "Killer",
-                Type = "Hund",
-                Birthdate = new DateTime(2018, 08, 08),
-                SoldDate = new DateTime(2019, 09, 09),
-                Color = "Gul",
-                PrevOwner = "Jens",
-                Price = 5000.00
-            };
-            _petService.CreatePet(pet4);
+
         }
 
         int PrintFindPetById()
         {
-            Console.WriteLine("Skriv id på Pet ");
+            Console.WriteLine("Type a pet ID ");
             int id;
             while (!int.TryParse(Console.ReadLine(), out id))
             {
-                Console.WriteLine("ID er altid et tal");
+                Console.WriteLine("Invalid ID");
             }
 
             return id;
         }
         string PrintFintPetByType()
         {
-            Console.WriteLine("Skriv type på Pet ");
+            Console.WriteLine("Pet type: ");
             string name = Console.ReadLine();
             return name;
         }
@@ -181,12 +169,12 @@ namespace Morten.PetShop.ConsoleApp
 
         private void ShowPets(List<Pet> pets)
         {
-            Console.WriteLine("\nListe af film");
+            Console.WriteLine("\nList of pets");
             foreach (var pet in pets)
             {
                 Console.WriteLine($"Id: {pet.Id} | Navn: {pet.Name} | Type: {pet.Type} " +
-                    $"| Birthdate: {pet.Birthdate} | Solddate: {pet.SoldDate}" +
-                    $" | Color: {pet.Color} | Previous Owner: {pet.PrevOwner} | Price: {pet.Price}");
+                                  $"| Birthdate: {pet.BirthDate} | Solddate: {pet.SoldDate}" +
+                                  $" | Color: {pet.Color} | Previous Owner: {pet.PreviousOwner} | Price: {pet.Price}");
             }
             Console.WriteLine("____________________________________________________________________________");
             Console.WriteLine("\n");

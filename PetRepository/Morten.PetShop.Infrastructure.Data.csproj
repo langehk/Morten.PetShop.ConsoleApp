@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Morten.PetShop.Entities\Morten.PetShop.Core\Morten.PetShop.Core.csproj" />
+    <ProjectReference Include="..\Morten.PetShop.Core\Morten.PetShop.Core.csproj" />
     <ProjectReference Include="..\Morten.PetShop.Entities\Morten.PetShop.Entities.csproj" />
   </ItemGroup>
 </Project>

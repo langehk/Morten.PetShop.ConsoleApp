@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Morten.PetShop.Core.DomainService;
-using Morten.PetShop.Entities;
 
+using Morten.PetShop.Entities;
+using Morten.PetShop.Core.DomainService;
 
 namespace Morten.PetShop.Infrastructure.Data
 {
@@ -33,14 +33,7 @@ namespace Morten.PetShop.Infrastructure.Data
             return _pets;
         }
 
-        //ID: int
-        //Name: string
-        //Type: string or Enum
-        //Birthdate: DateTime
-        //SoldDate: DateTime
-        //Color: string
-        //PreviousOwner: string
-        //Price: double
+       
         public Pet Update(Pet petUpdate)
         {
             var petFraDB = this.ReadById(petUpdate.Id);

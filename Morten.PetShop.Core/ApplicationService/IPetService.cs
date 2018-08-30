@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using Morten.PetShop.Entities;
 using System.Text;
+using Morten.PetShop.Entities;
 
 namespace Morten.PetShop.Core.ApplicationService
 {
     public interface IPetService
     {
-        Pet NewPet(string name, string type, DateTime birthDate, DateTime soldDate, string color, string prevOwner, double price);
+        Pet NewPet(string name, 
+                   string type, 
+                   DateTime birthDate, 
+                   DateTime soldDate, 
+                   string color, 
+                   string previousOwner, 
+                   double price);
 
 
         Pet CreatePet(Pet p);

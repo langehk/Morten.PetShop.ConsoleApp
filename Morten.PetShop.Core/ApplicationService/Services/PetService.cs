@@ -30,22 +30,22 @@ namespace Morten.PetShop.Core.ApplicationService.Services
             };
             return pet;
         }
-        //Create
+  
         public Pet CreatePet(Pet p)
         {
             return _petRepo.Create(p);
         }
-        //Read
+       
         public List<Pet> GetAllPets()
         {
             return _petRepo.ReadAll().ToList();
         }
-        //Read
+  
         public Pet FindPetById(int id)
         {
             return _petRepo.ReadById(id);
         }
-        //Read
+
         public List<Pet> FindPetByType(string searchValue)
         {
             var list = _petRepo.ReadAll();
@@ -53,27 +53,33 @@ namespace Morten.PetShop.Core.ApplicationService.Services
             queryCont.OrderBy(pet => pet.Type);
             return queryCont.ToList();
         }
-        //Read
+     
         public List<Pet> SortByPrice()
         {
             throw new NotImplementedException();
         }
-        //Read
+
         public List<Pet> GetFiveCheapest()
         {
             throw new NotImplementedException();
         }
-        //update
+    
         public Pet UpdatePet(Pet petUpdate)
         {
             var pet = FindPetById(petUpdate.Id);
 
             pet.Name = petUpdate.Name;
+
             pet.Type = petUpdate.Type;
+
             pet.BirthDate = petUpdate.BirthDate;
+
             pet.SoldDate = petUpdate.SoldDate;
+
             pet.Color = petUpdate.Color;
+
             pet.PreviousOwner = petUpdate.PreviousOwner;
+
             pet.Price = petUpdate.Price;
 
             return pet;
@@ -84,7 +90,10 @@ namespace Morten.PetShop.Core.ApplicationService.Services
             return _petRepo.delete(iDForDelete);
         }
 
-
+        public List<Pet> SortByprice()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     
