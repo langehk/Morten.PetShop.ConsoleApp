@@ -2,6 +2,7 @@
 using Morten.PetShop.Core.ApplicationService;
 using System.Collections.Generic;
 using System.Text;
+using Morten.PetShop.Entities;
 
 namespace Morten.PetShop.ConsoleApp
 {
@@ -55,11 +56,11 @@ namespace Morten.PetShop.ConsoleApp
                         var birthDate = AskQuestion("Birthdate: ");
                         var soldDate = AskQuestion("Solddate: ");
                         var color = AskQuestion("Color: ");
-                        var prevOwner = AskQuestion("Previous owner: ");
+                        var previousOwner = AskQuestion("Previous owner: ");
                         var price = AskQuestion("Price: ");
                         var pet = _petService.NewPet(name, type, Convert.ToDateTime(birthDate),
                                             Convert.ToDateTime(soldDate), color,
-                                            prevOwner, Convert.ToDouble(price));
+                                                     previousOwner, Convert.ToDouble(price));
                         _petService.CreatePet(pet);
                         break;
                     case 4:
@@ -74,32 +75,32 @@ namespace Morten.PetShop.ConsoleApp
                         var newBirthDate = AskQuestion("Birthdate: ");
                         var newSoldDate = AskQuestion("Solddate: ");
                         var newColor = AskQuestion("Color: ");
-                        var newPrevOwner = AskQuestion("Previous owner: ");
+                        var newPreviousOwner = AskQuestion("Previous owner: ");
                         var newPrice = AskQuestion("Price: ");
                         _petService.UpdatePet(new Pet()
                         {
                             Id = idForEdit,
                             Name = newName,
                             Type = newType,
-                            Birthdate = Convert.ToDateTime(newBirthDate),
+                            //Birthdate = Convert.ToDateTime(newBirthDate),
                             SoldDate = Convert.ToDateTime(newSoldDate),
                             Color = newColor,
-                            PrevOwner = newPrevOwner,
+                            //PrevOwner = newPreviousOwner,
                             Price = Convert.ToDouble(newPrice)
                         });
                         break;
                     case 6:
-                        Console.WriteLine("Nope");
+                        Console.WriteLine("...");
                         break;
                     case 7:
-                        Console.WriteLine("Nope");
+                        Console.WriteLine("...");
                         break;
                     default:
                         break;
                 }
                 selection = PetMenu(menuEnhender);
             }
-            Console.WriteLine("Farvel");
+            Console.WriteLine("Hej");
 
 
             Console.ReadLine();
