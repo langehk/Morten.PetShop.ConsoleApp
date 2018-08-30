@@ -154,7 +154,7 @@ namespace EASV.PetShop.ConsoleApp
             var list = _petService.GetFiveCheapest();
             foreach (var pet in list)
             {
-                Console.WriteLine("Price: {1:N}", pet.Price);
+                Console.WriteLine($"Id: {pet.Id} Name: { pet.Name}  Type: {pet.Type} BirthDate: {pet.BirthDate} SoldDate: {pet.SoldDate} Color: {pet.Color} PreviousOwner: {pet.PreviousOwner} Price: {pet.Price}");
             }
         }
 
