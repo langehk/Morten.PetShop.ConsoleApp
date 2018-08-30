@@ -44,7 +44,11 @@ namespace EASV.PetShop.ConsoleApp
                         break;
                     case 2:
                         var searchType = PrintFintPetByType();
-                        _petService.FindPetByType(searchType);
+                        var result =_petService.FindPetByType(searchType);
+                        foreach (var searchPet in result)
+                        {
+                            Console.WriteLine(searchPet.Name);
+                        }
 
                         break;
                     case 3:
@@ -80,6 +84,9 @@ namespace EASV.PetShop.ConsoleApp
                         break;
 
                     case 5:
+
+
+
                         var idForEdit = PrintFindPetById();
 
                         var petToEdit = _petService.FindPetById(idForEdit);
@@ -98,15 +105,17 @@ namespace EASV.PetShop.ConsoleApp
 
                         var newPrice = AskQuestion("Price: ");
 
+
+
                         _petService.UpdatePet(new Pet()
                         {
                             Id = idForEdit,
                             Name = newName,
                             Type = newType,
-                            //Birthdate = Convert.ToDateTime(newBirthDate),
+                            BirthDate = Convert.ToDateTime(newBirthDate),
                             SoldDate = Convert.ToDateTime(newSoldDate),
                             Color = newColor,
-                            //PrevOwner = newPreviousOwner,
+                            PreviousOwner = newPreviousOwner,
                             Price = Convert.ToDouble(newPrice)
                         });
                         break;
@@ -135,7 +144,7 @@ namespace EASV.PetShop.ConsoleApp
                 Type = "Fugl",
                 BirthDate = new DateTime(2013, 05, 08),
                 SoldDate = new DateTime(2019, 05, 09),
-                Color = "grøn",
+                Color = "Sårt",
                 PreviousOwner = "Brian",
                 Price = 3500
 
@@ -177,7 +186,7 @@ namespace EASV.PetShop.ConsoleApp
                                   $"| Birthdate: {pet.BirthDate} | Solddate: {pet.SoldDate}" +
                                   $" | Color: {pet.Color} | Previous Owner: {pet.PreviousOwner} | Price: {pet.Price}");
             }
-            Console.WriteLine("____________________________________________________________________________");
+            Console.WriteLine("_____________________________^ PETS LISTED ABOVE ^__________________________________");
             Console.WriteLine("\n");
         }
         //UI
@@ -194,7 +203,7 @@ namespace EASV.PetShop.ConsoleApp
             {
                 Console.WriteLine("That's not a valid number");
             }
-            Console.WriteLine("selection: " + selection);
+            Console.WriteLine("Your selected numer: " + selection);
             return selection;
 
         }

@@ -63,21 +63,6 @@ namespace EASV.PetShop.Infrastructure.Data
         }
 
 
-        Pet IPetRepository.ReadById(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        IEnumerable<Pet> IPetRepository.ReadAll()
-        {
-            throw new System.NotImplementedException();
-        }
-
-
-
-        Pet IPetRepository.delete(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+       
     }
 }
