@@ -38,19 +38,23 @@ namespace EASV.PetShop.ConsoleApp
             {
                 switch (selection)
                 {
+                    // Get a list of all pets
                     case 1:
                         var pets = _petService.GetAllPets();
                         ShowPets(pets);
                         break;
+                        //Search for at pet type
                     case 2:
                         var searchType = PrintFintPetByType();
                         var result =_petService.FindPetByType(searchType);
                         foreach (var searchPet in result)
                         {
-                            Console.WriteLine(searchPet.Name);
+                            Console.WriteLine($"Id: {searchPet.Id} Name: { searchPet.Name}  Type: {searchPet.Type} BirthDate: {searchPet.BirthDate} SoldDate: {searchPet.SoldDate} Color: {searchPet.Color} PreviousOwner: {searchPet.PreviousOwner} Price: {searchPet.Price}");
                         }
 
                         break;
+
+                        //Add a new pet
                     case 3:
                         var name = AskQuestion("Name: ");
 
@@ -78,14 +82,16 @@ namespace EASV.PetShop.ConsoleApp
                         _petService.CreatePet(pet);
                         break;
 
+                        // Remove a pet
+
                     case 4:
                         var iDForDelete = PrintFindPetById();
                         _petService.DeletePet(iDForDelete);
                         break;
 
+                        //Edit a pet
                     case 5:
-
-
+                        
 
                         var idForEdit = PrintFindPetById();
 
@@ -105,8 +111,6 @@ namespace EASV.PetShop.ConsoleApp
 
                         var newPrice = AskQuestion("Price: ");
 
-
-
                         _petService.UpdatePet(new Pet()
                         {
                             Id = idForEdit,
@@ -119,18 +123,22 @@ namespace EASV.PetShop.ConsoleApp
                             Price = Convert.ToDouble(newPrice)
                         });
                         break;
+
+                        // Sort after price
                     case 6:
-                        Console.WriteLine("...");
+                        Console.WriteLine("");
                         break;
+
+                        //Find the 5 cheapest
                     case 7:
-                        Console.WriteLine("...");
+                        
                         break;
                     default:
                         break;
                 }
                 selection = PetMenu(menuEnhender);
             }
-            Console.WriteLine("Hej");
+            Console.WriteLine("Closing program...");
 
 
             Console.ReadLine();
@@ -150,6 +158,35 @@ namespace EASV.PetShop.ConsoleApp
 
             };
             _petService.CreatePet(pet1);
+
+            var pet2 = new Pet()
+            {
+                Name = "Brian",
+                Type = "Hund",
+                BirthDate = new DateTime(2013, 05, 08),
+                SoldDate = new DateTime(2019, 05, 09),
+                Color = "Pink",
+                PreviousOwner = "Ole",
+                Price = 7777
+                    
+            };
+            _petService.CreatePet(pet2);
+
+            var pet3 = new Pet()
+            {
+                Name = "Allan",
+                Type = "Hund",
+                BirthDate = new DateTime(2013, 05, 08),
+                SoldDate = new DateTime(2019, 05, 09),
+                Color = "Gul",
+                PreviousOwner = "Ole",
+                Price = 2345
+
+            };
+            _petService.CreatePet(pet3);
+
+
+
 
         }
 
