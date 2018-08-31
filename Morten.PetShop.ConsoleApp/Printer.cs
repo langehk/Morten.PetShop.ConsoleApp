@@ -17,7 +17,9 @@ namespace EASV.PetShop.ConsoleApp
 
             StartData();
         }
-        
+        /*
+         * Shows the menu, with the options for the user.
+         */ 
         public void StartUI()
         {
             string[] menuEnhender =
@@ -130,7 +132,7 @@ namespace EASV.PetShop.ConsoleApp
 
                         foreach (var sortPet in sortResult)
                         {
-                            Console.WriteLine($"Id: {sortPet.Id} Name: { sortPet.Name}  Type: {sortPet.Type} BirthDate: {sortPet.BirthDate} SoldDate: {sortPet.SoldDate} Color: {sortPet.Color} PreviousOwner: {sortPet.PreviousOwner} Price: {sortPet.Price}");
+                            Console.WriteLine($"Id: {sortPet.Id} | Name: { sortPet.Name} | Type: {sortPet.Type} | BirthDate: {sortPet.BirthDate} | SoldDate: {sortPet.SoldDate} | Color: {sortPet.Color} | PreviousOwner: {sortPet.PreviousOwner} | Price: {sortPet.Price}");
                         }
                         break;
 
@@ -154,19 +156,22 @@ namespace EASV.PetShop.ConsoleApp
             var list = _petService.GetFiveCheapest();
             foreach (var pet in list)
             {
-                Console.WriteLine($"Id: {pet.Id} Name: { pet.Name}  Type: {pet.Type} BirthDate: {pet.BirthDate} SoldDate: {pet.SoldDate} Color: {pet.Color} PreviousOwner: {pet.PreviousOwner} Price: {pet.Price}");
+                Console.WriteLine($"Id: {pet.Id} | Name: { pet.Name} | Type: {pet.Type} | BirthDate: {pet.BirthDate} | SoldDate: {pet.SoldDate} | Color: {pet.Color} | PreviousOwner: {pet.PreviousOwner} | Price: {pet.Price}");
             }
         }
 
+        /*
+         *  Pre-added pets, "data" that will show up when initializing the program.
+         */
         private void StartData()
         {
             var pet1 = new Pet()
             {
                 Name = "pip",
-                Type = "Fugl",
+                Type = "Bird",
                 BirthDate = new DateTime(2013, 05, 08),
                 SoldDate = new DateTime(2019, 05, 09),
-                Color = "Sårt",
+                Color = "Black",
                 PreviousOwner = "Brian",
                 Price = 3500
 
@@ -176,9 +181,9 @@ namespace EASV.PetShop.ConsoleApp
             var pet2 = new Pet()
             {
                 Name = "Brian",
-                Type = "Hund",
+                Type = "Dog",
                 BirthDate = new DateTime(2013, 05, 08),
-                SoldDate = new DateTime(2019, 05, 09),
+                SoldDate = new DateTime(2015, 05, 09),
                 Color = "Pink",
                 PreviousOwner = "Ole",
                 Price = 7777
@@ -189,10 +194,10 @@ namespace EASV.PetShop.ConsoleApp
             var pet3 = new Pet()
             {
                 Name = "Allan",
-                Type = "Hund",
+                Type = "Dog",
                 BirthDate = new DateTime(2013, 05, 08),
-                SoldDate = new DateTime(2019, 05, 09),
-                Color = "Gul",
+                SoldDate = new DateTime(2014, 05, 09),
+                Color = "Yellow",
                 PreviousOwner = "Ole",
                 Price = 2345
 
@@ -202,10 +207,10 @@ namespace EASV.PetShop.ConsoleApp
             var pet4 = new Pet()
             {
                 Name = "Allan",
-                Type = "Hund",
+                Type = "Horse",
                 BirthDate = new DateTime(2013, 05, 08),
-                SoldDate = new DateTime(2019, 05, 09),
-                Color = "Gul",
+                SoldDate = new DateTime(2014, 05, 09),
+                Color = "Green",
                 PreviousOwner = "Ole",
                 Price = 2345
 
@@ -214,11 +219,11 @@ namespace EASV.PetShop.ConsoleApp
 
             var pet5 = new Pet()
             {
-                Name = "Allan",
-                Type = "Hund",
+                Name = "Karl",
+                Type = "Goat",
                 BirthDate = new DateTime(2013, 05, 08),
-                SoldDate = new DateTime(2019, 05, 09),
-                Color = "Gul",
+                SoldDate = new DateTime(2016, 05, 09),
+                Color = "Purple",
                 PreviousOwner = "Ole",
                 Price = 3333
 
@@ -227,11 +232,11 @@ namespace EASV.PetShop.ConsoleApp
 
             var pet6 = new Pet()
             {
-                Name = "Allan",
-                Type = "Hund",
+                Name = "Otto",
+                Type = "Dog",
                 BirthDate = new DateTime(2013, 05, 08),
-                SoldDate = new DateTime(2019, 05, 09),
-                Color = "Gul",
+                SoldDate = new DateTime(2017, 05, 09),
+                Color = "White",
                 PreviousOwner = "Ole",
                 Price = 9999
 

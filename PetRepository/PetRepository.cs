@@ -16,6 +16,9 @@ namespace EASV.PetShop.Infrastructure.Data
             return video;
         }
 
+        /*
+         *  Read the pet by ID
+         */
         public Pet ReadById(int id)
         {
             foreach (var pet in _pets)
@@ -27,12 +30,18 @@ namespace EASV.PetShop.Infrastructure.Data
             }
             return null;
         }
+
+        /*
+         *  Read all pets.
+         */
         public IEnumerable<Pet> ReadAll()
         {
             return _pets;
         }
 
-       
+       /*
+        * Updates the pet, and replaces all values.
+        */
         public Pet Update(Pet petUpdate)
         {
             var petFraDB = this.ReadById(petUpdate.Id);
@@ -50,6 +59,9 @@ namespace EASV.PetShop.Infrastructure.Data
             return null;
         }
 
+        /*
+         *  Delete a pet.
+         */
         public Pet delete(int id)
         {
             var petFundet = this.ReadById(id);

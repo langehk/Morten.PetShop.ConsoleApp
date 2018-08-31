@@ -30,22 +30,33 @@ namespace EASV.PetShop.Core.ApplicationService.Services
             };
             return pet;
         }
-  
+  /*
+   *  Creates a new pet.
+   */
         public Pet CreatePet(Pet p)
         {
             return _petRepo.Create(p);
         }
        
+        /*
+         *  Get all pets.
+         */
         public List<Pet> GetAllPets()
         {
             return _petRepo.ReadAll().ToList();
         }
   
+        /*
+         *  Finds a pet by id.
+         */
         public Pet FindPetById(int id)
         {
             return _petRepo.ReadById(id);
         }
 
+        /*
+         *  Search for a specific pet type.
+         */
         public List<Pet> FindPetByType(string searchValue)
         {
             var list = _petRepo.ReadAll();
@@ -56,15 +67,15 @@ namespace EASV.PetShop.Core.ApplicationService.Services
      
 
         /*
-         * Sortere ud fra 5 billigeste
+         * Gets the five cheapest pets and list them.
          */
         public List<Pet> GetFiveCheapest()
         {
             var listQuery = _petRepo.ReadAll();
             listQuery.OrderBy(pet => pet.Price);
-                                                 // Forskellige ting man kan sortere efter, ud fra et query.
+                                                 // You can sort different things by using querys, example sort by type ect..
                     
-            return listQuery.Take(5).ToList();   //DET ER HER MAN EXECUTER SIN QUERY.
+            return listQuery.Take(5).ToList();   //This is where the query gets executed.
         }
     /*
      * Update pet
@@ -89,7 +100,7 @@ namespace EASV.PetShop.Core.ApplicationService.Services
 
             return pet;
         }
-        //Delete
+        //Delete a pet.
         public Pet DeletePet(int iDForDelete)
         {
             return _petRepo.delete(iDForDelete);
