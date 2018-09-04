@@ -114,7 +114,5 @@ namespace EASV.PetShop.Core.ApplicationService.Services
             var query = list.OrderBy(Pet => Pet.Price);
             return query.ToList();
         }
-
-       
     }
 }
