@@ -9,7 +9,5 @@ namespace EASV.PetShop.Entities
 
         public string LastName { get; set; }
 
-
-
     }
 }

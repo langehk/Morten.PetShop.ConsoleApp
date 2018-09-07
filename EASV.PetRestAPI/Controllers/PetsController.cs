@@ -23,6 +23,8 @@ namespace EASV.PetRestAPI.Controllers
         }
 
 
+    
+
         // GET api/pets
         [HttpGet]
         public ActionResult<IEnumerable<Pet>> Get()
@@ -30,6 +32,13 @@ namespace EASV.PetRestAPI.Controllers
             //return new string[] { "value1", "value2" };
             //return new List<Pet>[] { "Name" ,"Color" };
             return _petService.GetAllPets();
+        }
+
+        // GET api/pets/5 - READ
+        [HttpGet("{id}")]
+        public ActionResult<string> GetAction (int id) 
+        {
+            return "value";
         }
 
 

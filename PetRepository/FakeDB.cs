@@ -9,8 +9,8 @@ namespace EASV.PetShop.Infrastructure.Data
         public static int Id = 1;
         public static readonly List<Pet> Pets = new List<Pet>();
 
-        //public static int OrderId = 1;
-        //public static readonly List<Order> Orders = new List<Order>();
+        public static int OwnerId = 1;
+        public static readonly List<Owner> Owners = new List<Owner>();
     }
 }
 
