@@ -13,6 +13,11 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 
 using EASV.PetRestAPI.Models;
+using EASV.PetShop.Core.ApplicationService;
+using EASV.PetShop.Core.ApplicationService.Services;
+using EASV.PetShop.Core.DomainService;
+
+using EASV.PetShop.Infrastructure.Data.Repositories;
 
 namespace EASV.PetRestAPI
 {
@@ -28,6 +33,9 @@ namespace EASV.PetRestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IPetService, PetService>();
+            services.AddScoped<IPetRepository, PetRepository>();
+
             services.AddDbContext<PetContext>(opt =>
               opt.UseInMemoryDatabase("PetList"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

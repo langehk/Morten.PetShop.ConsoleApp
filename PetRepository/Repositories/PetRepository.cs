@@ -1,19 +1,54 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using EASV.PetShop.Core.DomainService;
 using EASV.PetShop.Entities;
 
-namespace EASV.PetShop.Infrastructure.Data
+namespace EASV.PetShop.Infrastructure.Data.Repositories
 {
     public class PetRepository : IPetRepository
     {
+        
+        public PetRepository()
+
+        {
+            if (FakeDB.Pets.Count >= 1) return;
+            var pet1 = new Pet()
+            {
+                Id = FakeDB.Id++,
+                Name = "Bob",
+                Type = "Terrier",
+                Color = "Blue",
+                BirthDate = new DateTime(2013,03,03),
+                SoldDate = new DateTime(2014,02,05),
+                PreviousOwner = "Allan",
+                Price = 2350
+
+            };
+            FakeDB.Pets.Add(pet1);
+
+            var pet2 = new Pet()
+            {
+                Id = FakeDB.Id++,
+                Name = "Jan",
+                Type = "Chefer",
+                Color = "Grøn",
+                BirthDate = new DateTime(2013, 03, 03),
+                SoldDate = new DateTime(2014, 02, 05),
+                PreviousOwner = "Allan",
+                Price = 7777
+            };
+            FakeDB.Pets.Add(pet2);
+        }
+
+
         static int id = 1;
         private List<Pet> _pets = new List<Pet>();
 
-        public Pet Create(Pet video)
+        public Pet Create(Pet pet)
         {
-            video.Id = id++;
-            _pets.Add(video);
-            return video;
+            pet.Id = id++;
+            _pets.Add(pet);
+            return pet;
         }
 
         /*
@@ -36,7 +71,7 @@ namespace EASV.PetShop.Infrastructure.Data
          */
         public IEnumerable<Pet> ReadAll()
         {
-            return _pets;
+            return FakeDB.Pets;
         }
 
        /*

@@ -4,7 +4,7 @@ using System.Linq;
 using EASV.PetShop.Core.ApplicationService;
 using EASV.PetShop.Core.ApplicationService.Services;
 using EASV.PetShop.Core.DomainService;
-using EASV.PetShop.Infrastructure.Data;
+using EASV.PetShop.Infrastructure.Data.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 

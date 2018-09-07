@@ -8,4 +8,7 @@
     <ProjectReference Include="..\Morten.PetShop.Entities\EASV.PetShop.Entities.csproj" />
     <ProjectReference Include="..\Morten.PetShop.Core\EASV.PetShop.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
 </Project>
