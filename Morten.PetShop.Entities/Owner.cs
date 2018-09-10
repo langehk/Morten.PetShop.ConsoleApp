@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace EASV.PetShop.Entities
 {
     public class Owner
@@ -8,6 +10,10 @@ namespace EASV.PetShop.Entities
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public Pet Pet { get; set; } //Relation til pet   (Type, name)
+
+        public List<Owner> Owners { get; set; }
 
     }
 }

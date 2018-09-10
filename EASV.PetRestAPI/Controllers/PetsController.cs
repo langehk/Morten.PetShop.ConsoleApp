@@ -78,6 +78,7 @@ namespace EASV.PetRestAPI.Controllers
                 return BadRequest("Parameter Id and pet ID must be the same");
             }
 
+            _petService.UpdatePet(pet);
             return Ok(_petService.UpdatePet(pet));
 
         }
