@@ -23,8 +23,6 @@ namespace EASV.PetRestAPI.Controllers
         }
 
 
-    
-
         // GET api/pets
         [HttpGet]
         public ActionResult<IEnumerable<Pet>> Get()
@@ -79,7 +77,7 @@ namespace EASV.PetRestAPI.Controllers
             }
 
             _petService.UpdatePet(pet);
-            return Ok(_petService.UpdatePet(pet));
+            return _petService.UpdatePet(pet);
 
         }
 

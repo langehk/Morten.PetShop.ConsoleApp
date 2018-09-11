@@ -38,6 +38,5 @@ namespace EASV.PetShop.Entities
             set;
         }
 
-
     }
 }

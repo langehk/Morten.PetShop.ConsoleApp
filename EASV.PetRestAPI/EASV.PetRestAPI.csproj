@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Morten.PetShop.Core\EASV.PetShop.Core.csproj" />
     <ProjectReference Include="..\PetRepository\EASV.PetShop.Infrastructure.Data.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\PetController.cs" />
+    <Compile Remove="Controllers\PetController.cs" />
+  </ItemGroup>
 </Project>

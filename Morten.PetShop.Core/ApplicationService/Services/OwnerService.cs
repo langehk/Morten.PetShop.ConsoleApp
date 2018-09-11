@@ -15,10 +15,7 @@ namespace EASV.PetShop.Core.ApplicationService.Services
             _repository = repository;
         }
 
-        public Owner New()
-        {
-            return new Owner();
-        }
+       
 
         public Owner CreateOwner(Owner owner)
         {
@@ -45,5 +42,19 @@ namespace EASV.PetShop.Core.ApplicationService.Services
         {
             return _repository.Update(OwnerUpdate);
         }
+
+        public Owner New(string firstname, string lastname )
+        {
+            
+        var owner = new Owner
+            {
+                FirstName = firstname,
+                LastName = lastname,
+               
+            };
+            return new Owner();
+        }
+
+       
     }
 }

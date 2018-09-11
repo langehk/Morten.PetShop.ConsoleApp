@@ -12,15 +12,17 @@ namespace EASV.PetShop.Core.DomainService
         //Create data
         Owner Create(Owner owner);
 
+
         //Read data
         Owner ReadById(int id);
         IEnumerable<Owner> ReadAll();
 
+
         //Update data
         Owner Update(Owner OwnerUpdate);
 
-        //Delete data 
 
+        //Delete data 
         Owner Delete(int id);
 
     }

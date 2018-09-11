@@ -138,7 +138,7 @@ namespace EASV.PetShop.ConsoleApp
 
                         //Find the 5 cheapest
                     case 7:
-                        GetFiveCheapestCars();
+                        GetFiveCheapestPets();
                         break;
                     default:
                         break;
@@ -151,7 +151,7 @@ namespace EASV.PetShop.ConsoleApp
             Console.ReadLine();
         }
 
-        private void GetFiveCheapestCars()
+        private void GetFiveCheapestPets()
         {
             var list = _petService.GetFiveCheapest();
             foreach (var pet in list)

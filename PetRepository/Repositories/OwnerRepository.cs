@@ -8,6 +8,30 @@ namespace EASV.PetShop.Infrastructure.Data.Repositories
 {
     public class OwnerRepository : IOwnerRepository
     {
+
+        public OwnerRepository()
+        {
+            if (FakeDB.Owners.Count >= 1) return;
+            var owner1 = new Owner()
+            {
+                Id = FakeDB.Id++,
+                FirstName = "Jan",
+                LastName = "Jørgensen",
+
+            };
+            FakeDB.Owners.Add(owner1);
+
+            var owner2 = new Owner()
+            {
+                Id = FakeDB.Id++,
+                FirstName = "Ole",
+                LastName = "Sørensen"
+            };
+
+            FakeDB.Owners.Add(owner2);
+        }
+    
+
         public Owner Create(Owner owner)
         {
             owner.Id = FakeDB.OwnerId++;
