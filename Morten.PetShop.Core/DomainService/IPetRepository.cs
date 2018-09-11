@@ -7,15 +7,17 @@ namespace EASV.PetShop.Core.DomainService
 {
     public interface IPetRepository
     {
+        IEnumerable<Pet> ReadPets();
+
         Pet Create(Pet pet);
 
+        Pet Delete(int id);
         Pet ReadById(int id);
-
-        IEnumerable<Pet> ReadAll();
 
         Pet Update(Pet petUpdate);
 
-        Pet delete(int id);
+        IEnumerable<Pet> ReadByType(string type);
 
+        IEnumerable<Pet> ReadByPrice();
     }
 }

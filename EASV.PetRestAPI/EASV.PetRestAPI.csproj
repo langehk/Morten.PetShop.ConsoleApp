@@ -17,6 +17,7 @@
     <ProjectReference Include="..\Morten.PetShop.Entities\EASV.PetShop.Entities.csproj" />
     <ProjectReference Include="..\Morten.PetShop.Core\EASV.PetShop.Core.csproj" />
     <ProjectReference Include="..\PetRepository\EASV.PetShop.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\Morten.PetShop.ConsoleApp\EASV.PetShop.ConsoleApp.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Controllers\PetController.cs" />

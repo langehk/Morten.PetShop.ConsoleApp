@@ -18,50 +18,48 @@ namespace EASV.PetRestAPI.Controllers
             _ownerService = ownerService;
         }
 
-        // GET api/owners -- READ All
+        // GET: api/Owners
         [HttpGet]
         public ActionResult<IEnumerable<Owner>> Get()
         {
-            return _ownerService.GetAllOwners();
+            return _ownerService.GetOwners();
         }
 
-        // GET api/owners/5 -- READ By Id
-        [HttpGet("{id}")]
+        // GET: api/Owners/5
+        [HttpGet("{id}", Name = "Get")]
         public ActionResult<Owner> Get(int id)
         {
-            if (id < 1) return BadRequest("Id must be greater then 0");
-
+            if (id < 1) return BadRequest("Id must be larger than 0");
             return _ownerService.FindOwnerById(id);
         }
 
-        // POST api/owners -- CREATE
+        // POST: api/Owners
         [HttpPost]
         public ActionResult<Owner> Post([FromBody] Owner owner)
         {
             if (string.IsNullOrEmpty(owner.FirstName))
             {
-                return BadRequest("Pet name is required for creating a pet");
+                return BadRequest("Firstname is Required for Creating Owner");
             }
-
             if (string.IsNullOrEmpty(owner.LastName))
             {
-                return BadRequest("Pet type is Required for Creating a pet");
+                return BadRequest("Lastname is Required for Creating Owner");
             }
-            //return StatusCode(503, "HORRIBLE ERROR CALL TECH SUPPORT");
             return _ownerService.CreateOwner(owner);
         }
 
-        // PUT api/owner/5 -- Update
+        // PUT: api/Owners/5
         [HttpPut("{id}")]
         public ActionResult<Owner> Put(int id, [FromBody] Owner owner)
         {
-            if (id < 1 || id != owner.Id)
+            if (id < 1 || id != owner.OwnerId)
             {
-                return BadRequest("Parameter Id and owner ID must be the same");
+                return BadRequest("Parameter Id and customer ID must be the same");
             }
-
-            return Ok();
+            return Ok(_ownerService.UpdateOwner(owner));
         }
+
+       
 
         // DELETE api/owners/5
         [HttpDelete("{id}")]

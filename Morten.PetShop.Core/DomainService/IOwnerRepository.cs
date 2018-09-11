@@ -1,28 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using EASV.PetShop.Entities;
+using System.Text;
 
 namespace EASV.PetShop.Core.DomainService
 {
     public interface IOwnerRepository
     {
-        // C R U D 
-
-
-        //Create data
+        IEnumerable<Owner> ReadOwners();
         Owner Create(Owner owner);
-
-
-        //Read data
         Owner ReadById(int id);
-        IEnumerable<Owner> ReadAll();
-
-
-        //Update data
-        Owner Update(Owner OwnerUpdate);
-
-
-        //Delete data 
+        Owner Update(Owner owner);
         Owner Delete(int id);
 
     }

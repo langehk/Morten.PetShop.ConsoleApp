@@ -8,51 +8,48 @@ namespace EASV.PetShop.Core.ApplicationService.Services
 {
     public class OwnerService : IOwnerService
     {
-        private IOwnerRepository _repository;
-
-        public OwnerService(IOwnerRepository repository)
+        readonly IOwnerRepository _ownerRepo;
+        public OwnerService(IOwnerRepository ownerRepository)
         {
-            _repository = repository;
+            _ownerRepo = ownerRepository;
         }
-
-       
 
         public Owner CreateOwner(Owner owner)
         {
-            return _repository.Create(owner);
+            return _ownerRepo.Create(owner);
         }
 
         public Owner DeleteOwner(int id)
         {
-            return _repository.Delete(id);
+            return _ownerRepo.Delete(id);
         }
 
         public Owner FindOwnerById(int id)
         {
-            return _repository.ReadById(id);
+            return _ownerRepo.ReadById(id);
         }
 
-        public List<Owner> GetAllOwners()
+        public List<Owner> GetOwners()
         {
-            return _repository.ReadAll().ToList();
+            return _ownerRepo.ReadOwners().ToList();
         }
 
-
-        public Owner UpdateOwner(Owner OwnerUpdate)
+        public Owner NewOwner(string firstName, string lastName)
         {
-            return _repository.Update(OwnerUpdate);
-        }
-
-        public Owner New(string firstname, string lastname )
-        {
-            
-        var owner = new Owner
+            var owner = new Owner()
             {
-                FirstName = firstname,
-                LastName = lastname,
-               
+                FirstName = firstName,
+                LastName = lastName
             };
-            return new Owner();
+            return owner;
+        }
+
+        public Owner UpdateOwner(Owner owner)
+        {
+            var ownerUpdate = FindOwnerById(owner.OwnerId);
+            ownerUpdate.FirstName = owner.FirstName;
+            ownerUpdate.LastName = owner.LastName;
+            return ownerUpdate;
         }
 
        

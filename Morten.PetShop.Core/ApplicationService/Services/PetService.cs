@@ -16,12 +16,45 @@ namespace EASV.PetShop.Core.ApplicationService.Services
             _petRepo = petRepository;
         }
 
-        public Pet NewPet(string name, string type, DateTime birthDate, DateTime soldDate, string color, string previousOwner, double price)
+        public Pet CreatePet(Pet pet)
         {
-            var pet = new Pet
+            return _petRepo.Create(pet);
+        }
+
+        public Pet DeletePet(int id)
+        {
+            return _petRepo.Delete(id);
+        }
+
+        public Pet FindPetById(int id)
+        {
+            return _petRepo.ReadById(id);
+        }
+
+        public List<Pet> FindPetByType(string type)
+        {
+            var list = _petRepo.ReadPets();
+            var question = list.Where(pet => pet.PetType.Equals(type));
+            question.OrderBy(pet => pet.PetType);
+            return question.ToList();
+        }
+
+        public List<Pet> Get5CheapestPets()
+        {
+            return _petRepo.ReadPets().OrderBy(pet => pet.Price).Take(5).ToList();
+        }
+
+        public List<Pet> GetPets()
+        {
+            return _petRepo.ReadPets().ToList();
+        }
+
+        public Pet NewPet(string petName, string type, DateTime birthDate, DateTime soldDate, string color, string previousOwner, double price)
+        {
+            var pet = new Pet()
             {
-                Name = name,
-                Type = type,
+                PetName = petName,
+                PetType = type,
                 BirthDate = birthDate,
                 SoldDate = soldDate,
                 Color = color,
@@ -30,89 +63,26 @@ namespace EASV.PetShop.Core.ApplicationService.Services
             };
             return pet;
         }
-  /*
-   *  Creates a new pet.
-   */
-        public Pet CreatePet(Pet p)
+
+        public List<Pet> SortByPrice()
         {
-            return _petRepo.Create(p);
-        }
-       
-        /*
-         *  Get all pets.
-         */
-        public List<Pet> GetAllPets()
-        {
-            return _petRepo.ReadAll().ToList();
-        }
-  
-        /*
-         *  Finds a pet by id.
-         */
-        public Pet FindPetById(int id)
-        {
-            return _petRepo.ReadById(id);
+            var list = _petRepo.ReadPets();
+            var question = list.OrderBy(pet => pet.Price);
+            return question.ToList();
+
         }
 
-        /*
-         *  Search for a specific pet type.
-         */
-        public List<Pet> FindPetByType(string searchValue)
-        {
-            var list = _petRepo.ReadAll();
-            var queryCont = list.Where(pet => pet.Type.Equals(searchValue));
-            queryCont.OrderBy(pet => pet.Type);
-            return queryCont.ToList();
-        }
-     
-
-        /*
-         * Gets the five cheapest pets and list them.
-         */
-        public List<Pet> GetFiveCheapest()
-        {
-            var listQuery = _petRepo.ReadAll();
-            listQuery.OrderBy(pet => pet.Price);
-                                                 // You can sort different things by using querys, example sort by type ect..
-                    
-            return listQuery.Take(5).ToList();   //This is where the query gets executed.
-        }
-    /*
-     * Update pet
-     */ 
         public Pet UpdatePet(Pet petUpdate)
         {
-            var pet = FindPetById(petUpdate.Id);
-
-            pet.Name = petUpdate.Name;
-
-            pet.Type = petUpdate.Type;
-
+            var pet = FindPetById(petUpdate.PetId);
+            pet.PetName = petUpdate.PetName;
+            pet.PetType = petUpdate.PetType;
             pet.BirthDate = petUpdate.BirthDate;
-
             pet.SoldDate = petUpdate.SoldDate;
-
             pet.Color = petUpdate.Color;
-
             pet.PreviousOwner = petUpdate.PreviousOwner;
-
             pet.Price = petUpdate.Price;
-
             return pet;
-        }
-        //Delete a pet.
-        public Pet DeletePet(int iDForDelete)
-        {
-            return _petRepo.delete(iDForDelete);
-        }
-
-
-        //Sort list of pets by price
-        public List<Pet> SortByprice()
-        {
-            var list = _petRepo.ReadAll();
-            var query = list.OrderBy(Pet => Pet.Price);
-            return query.ToList();
         }
     }
 }

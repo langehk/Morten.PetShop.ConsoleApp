@@ -4,11 +4,11 @@ namespace EASV.PetShop.Entities
 {
     public class Pet
     {
-        public int Id { get; set; }
+        public int PetId { get; set; }
 
-        public string Name { get; set; }
+        public string PetName { get; set; }
 
-        public string Type { get; set; }
+        public string PetType { get; set; }
 
         public DateTime BirthDate
         {

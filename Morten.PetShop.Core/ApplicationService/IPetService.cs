@@ -7,30 +7,26 @@ namespace EASV.PetShop.Core.ApplicationService
 {
     public interface IPetService
     {
-        Pet NewPet(string name, 
-                   string type, 
-                   DateTime birthDate, 
-                   DateTime soldDate, 
-                   string color, 
-                   string previousOwner, 
+        List<Pet> GetPets();
+        Pet NewPet(string petName,
+                   string type,
+                   DateTime birthDate,
+                   DateTime soldDate,
+                   string color,
+                   string previousOwner,
                    double price);
+        Pet CreatePet(Pet pet);
 
-
-        Pet CreatePet(Pet p);
-
+        Pet DeletePet(int id);
         Pet FindPetById(int id);
-
-        List<Pet> FindPetByType(string searchValue);
-
-        List<Pet> SortByprice();
-
-        List<Pet> GetFiveCheapest();
-
-        List<Pet> GetAllPets();
 
         Pet UpdatePet(Pet petUpdate);
 
-        Pet DeletePet(int idForDelete);
+        List<Pet> FindPetByType(string type);
+
+        List<Pet> SortByPrice();
+
+        List<Pet> Get5CheapestPets();
      
     }
 }

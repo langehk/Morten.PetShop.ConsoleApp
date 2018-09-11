@@ -8,57 +8,20 @@ namespace EASV.PetShop.Infrastructure.Data.Repositories
     public class PetRepository : IPetRepository
     {
         
-        public PetRepository()
-
-        {
-            if (FakeDB.Pets.Count >= 1) return;
-            var pet1 = new Pet()
-            {
-                Id = FakeDB.Id++,
-                Name = "Bob",
-                Type = "Terrier",
-                Color = "Blue",
-                BirthDate = new DateTime(2013,03,03),
-                SoldDate = new DateTime(2014,02,05),
-                PreviousOwner = "Allan",
-                Price = 2350
-
-            };
-            FakeDB.Pets.Add(pet1);
-
-            var pet2 = new Pet()
-            {
-                Id = FakeDB.Id++,
-                Name = "Jan",
-                Type = "Chefer",
-                Color = "Grøn",
-                BirthDate = new DateTime(2013, 03, 03),
-                SoldDate = new DateTime(2014, 02, 05),
-                PreviousOwner = "Allan",
-                Price = 7777
-            };
-            FakeDB.Pets.Add(pet2);
-        }
-
 
         static int id = 1;
-        private List<Pet> _pets = new List<Pet>();
-
         public Pet Create(Pet pet)
         {
-            pet.Id = id++;
-            _pets.Add(pet);
+            pet.PetId = id++;
+            FakeDB.Pets.Add(pet);
             return pet;
         }
 
-        /*
-         *  Read the pet by ID
-         */
         public Pet ReadById(int id)
         {
-            foreach (var pet in _pets)
+            foreach (var pet in FakeDB.Pets)
             {
-                if (pet.Id == id)
+                if (pet.PetId == id)
                 {
                     return pet;
                 }
@@ -66,50 +29,64 @@ namespace EASV.PetShop.Infrastructure.Data.Repositories
             return null;
         }
 
-        /*
-         *  Read all pets.
-         */
-        public IEnumerable<Pet> ReadAll()
+        public Pet FindByType(string type)
+        {
+            foreach (var petByType in FakeDB.Pets)
+            {
+                if (petByType.PetType == type)
+                {
+                    return petByType;
+                }
+            }
+            return null;
+        }
+
+        public Pet Delete(int id)
+        {
+            var petFound = this.ReadById(id);
+            if (petFound != null)
+            {
+                FakeDB.Pets.Remove(petFound);
+                return petFound;
+            }
+            return null;
+        }
+
+        public IEnumerable<Pet> ReadPets()
         {
             return FakeDB.Pets;
         }
 
-       /*
-        * Updates the pet, and replaces all values.
-        */
         public Pet Update(Pet petUpdate)
         {
-            var petFraDB = this.ReadById(petUpdate.Id);
-            if (petFraDB != null)
+            var petFromDB = this.ReadById(petUpdate.PetId);
+            if (petFromDB != null)
             {
-                petFraDB.Name = petUpdate.Name;
-                petFraDB.Type = petUpdate.Type;
-                petFraDB.BirthDate = petUpdate.BirthDate;
-                petFraDB.SoldDate = petUpdate.BirthDate;
-                petFraDB.Color = petUpdate.Color;
-                petFraDB.PreviousOwner = petUpdate.PreviousOwner;
-                petFraDB.Price = petUpdate.Price;
-                return petFraDB;
+                petFromDB.PetName = petUpdate.PetName;
+                petFromDB.PetType = petUpdate.PetType;
+                petFromDB.BirthDate = petUpdate.BirthDate;
+                petFromDB.SoldDate = petUpdate.SoldDate;
+                petFromDB.Color = petUpdate.Color;
+                petFromDB.PreviousOwner = petUpdate.PreviousOwner;
+                petFromDB.Price = petUpdate.Price;
+                return petFromDB;
             }
             return null;
         }
 
-        /*
-         *  Delete a pet.
-         */
-        public Pet delete(int id)
+        public IEnumerable<Pet> ReadByType(string type)
         {
-            var petFundet = this.ReadById(id);
-
-            if (petFundet != null)
+            var typeFound = this.FindByType(type);
+            if (typeFound != null)
             {
-                _pets.Remove(petFundet);
-                return petFundet;
+                return FakeDB.Pets;
             }
             return null;
         }
 
-
-       
+        public IEnumerable<Pet> ReadByPrice()
+        {
+            return FakeDB.Pets;
+        }
     }
 }

@@ -5,15 +5,13 @@ namespace EASV.PetShop.Entities
 {
     public class Owner
     {
-        public int Id { get; set; }
-
+        public int OwnerId { get; set; }
         public string FirstName { get; set; }
-
         public string LastName { get; set; }
 
-        public Pet Pet { get; set; } //Relation til pet   (Type, name)
+        //public Pet Pet { get; set; } //Relation til pet   (Type, name)
 
-        public List<Owner> Owners { get; set; }
+        //public List<Owner> Owners { get; set; }
 
     }
 }

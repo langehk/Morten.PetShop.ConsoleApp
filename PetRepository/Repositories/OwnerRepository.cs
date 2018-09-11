@@ -8,69 +8,52 @@ namespace EASV.PetShop.Infrastructure.Data.Repositories
 {
     public class OwnerRepository : IOwnerRepository
     {
-
-        public OwnerRepository()
-        {
-            if (FakeDB.Owners.Count >= 1) return;
-            var owner1 = new Owner()
-            {
-                Id = FakeDB.Id++,
-                FirstName = "Jan",
-                LastName = "Jørgensen",
-
-            };
-            FakeDB.Owners.Add(owner1);
-
-            var owner2 = new Owner()
-            {
-                Id = FakeDB.Id++,
-                FirstName = "Ole",
-                LastName = "Sørensen"
-            };
-
-            FakeDB.Owners.Add(owner2);
-        }
-    
-
+        static int id = 1;
         public Owner Create(Owner owner)
         {
-            owner.Id = FakeDB.OwnerId++;
+            owner.OwnerId = id++;
             FakeDB.Owners.Add(owner);
             return owner;
         }
 
         public Owner Delete(int id)
         {
-            var ownerFound = ReadById(id);
-            if (ownerFound == null) return null;
-
-            FakeDB.Owners.Remove(ownerFound);
-            return ownerFound;
-
-        }
-
-        public IEnumerable<Owner> ReadAll()
-        {
-            return FakeDB.Owners;
+            var ownerFound = this.ReadById(id);
+            if (ownerFound != null)
+            {
+                FakeDB.Owners.Remove(ownerFound);
+                return ownerFound;
+            }
+            return null;
         }
 
         public Owner ReadById(int id)
         {
-            return FakeDB.Owners.FirstOrDefault(owner => owner.Id == id);
+            foreach (var owner in FakeDB.Owners)
+            {
+                if (owner.OwnerId == id)
+                {
+                    return owner;
+                }
+            }
+            return null;
         }
 
-        public Owner Update(Owner OwnerUpdate)
+        public IEnumerable<Owner> ReadOwners()
         {
-            var ownerFromDB = ReadById(OwnerUpdate.Id);
-            if (ownerFromDB == null) return null;
+            return FakeDB.Owners;
+        }
 
-            ownerFromDB.FirstName = OwnerUpdate.FirstName;
-            ownerFromDB.LastName = OwnerUpdate.LastName;
-            if (OwnerUpdate.Pet != null && ownerFromDB.Pet != null)
+        public Owner Update(Owner owner)
+        {
+            var ownerFromDB = this.ReadById(owner.OwnerId);
+            if (ownerFromDB != null)
             {
-                ownerFromDB.Pet.Id = OwnerUpdate.Pet.Id;
+                ownerFromDB.FirstName = owner.FirstName;
+                ownerFromDB.LastName = owner.LastName;
+                return ownerFromDB;
             }
-            return ownerFromDB;
+            return null;
         }
     }
 }

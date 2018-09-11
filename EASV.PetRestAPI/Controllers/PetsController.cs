@@ -13,85 +13,71 @@ namespace EASV.PetRestAPI.Controllers
     [ApiController]
     public class PetsController : ControllerBase
     {
-
         private readonly IPetService _petService;
 
-       
         public PetsController(IPetService petService)
         {
             _petService = petService;
         }
 
-
-        // GET api/pets
+        // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<Pet>> Get()
         {
-            //return new string[] { "value1", "value2" };
-            //return new List<Pet>[] { "Name" ,"Color" };
-            return _petService.GetAllPets();
+            return _petService.GetPets();
         }
-
-        // GET api/pets/5 - READ
-        [HttpGet("{id}")]
-        public ActionResult<string> GetAction (int id) 
-        {
-            return "value";
-        }
-
 
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<Pet> Get(int id)
         {
-            if (id < 1) return BadRequest("Id must be greater then 0");
-
+            if (id < 1) return BadRequest("Id must be greater than 0");
             return _petService.FindPetById(id);
-
         }
 
-        // POST api/pets  ----- CREATE
+        // POST api/values
         [HttpPost]
         public ActionResult<Pet> Post([FromBody] Pet pet)
         {
-            if (string.IsNullOrEmpty(pet.Name))
+            if (string.IsNullOrEmpty(pet.PetName))
             {
-                return BadRequest("Pet name is required for creating a pet");
+                return BadRequest("Input pet name");
             }
-
-            if (string.IsNullOrEmpty(pet.Type))
+            if (string.IsNullOrEmpty(pet.PetType))
             {
-                return BadRequest("Pet type is Required for Creating a pet");
+                return BadRequest("Input pet type");
             }
-            //return StatusCode(503, "HORRIBLE ERROR CALL TECH SUPPORT");
+            if (string.IsNullOrEmpty(pet.Color))
+            {
+                return BadRequest("Input color");
+            }
+            if (string.IsNullOrEmpty(pet.PreviousOwner))
+            {
+                return BadRequest("Input previous owner");
+            }
             return _petService.CreatePet(pet);
         }
 
-        // PUT api/pets/5
+        // PUT api/values/5
         [HttpPut("{id}")]
         public ActionResult<Pet> Put(int id, [FromBody] Pet pet)
         {
-            if (id < 1 || id != pet.Id)
+            if (id < 1 || id != pet.PetId)
             {
-                return BadRequest("Parameter Id and pet ID must be the same");
+                return BadRequest("Parameter Id and customer ID must be the same");
             }
-
-            _petService.UpdatePet(pet);
-            return _petService.UpdatePet(pet);
-
+            return Ok(_petService.UpdatePet(pet));
         }
 
-        // DELETE api/pets/5
+        // DELETE api/values/5
         [HttpDelete("{id}")]
         public ActionResult<Pet> Delete(int id)
         {
-
             var pet = _petService.DeletePet(id);
             if (pet == null)
             {
                 return StatusCode(404, "Did not find Pet with ID " + id);
             }
-
             return Ok($"Pet with Id: {id} is Deleted");
         }
     }

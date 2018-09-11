@@ -8,116 +8,79 @@ namespace EASV.PetShop.ConsoleApp
 {
     public class Printer : IPrinter
     {
-        private IPetService _petService;
+        readonly IPetService _petService;
+        readonly IOwnerService _ownerService;
 
-        public Printer(IPetService petService)
+        public Printer(IPetService petService, IOwnerService ownerService)
         {
             _petService = petService;
-            
-
-            StartData();
+            _ownerService = ownerService;
         }
-        /*
-         * Shows the menu, with the options for the user.
-         */ 
-        public void StartUI()
+
+        public void PrintUI()
         {
-            string[] menuEnhender =
+            string[] menuItems =
             {
-                "List all pets",
-                "Search for pet type",
-                "Add new pet",
-                "Remove pet",
-                "Edit pet",
-                "Sort after price",
-                "5 cheapest pets",
-                "Exit"
+                "List all Pets",//1
+                "Create new Pet",//2
+                "Delete Pet",//3
+                "Update a Pet",//4
+                "Search Pets by Type",//5
+                "Sort Pets by Price",//6
+                "Get 5 cheapest Pets",//7
+                "OwnerMenu",//8
+                "Exit"//9
             };
 
-            var selection = PetMenu(menuEnhender);
+            string[] ownerMenuItems =
+            {
+                "List all Owners",//1
+                "Create new Owner",//2
+                "Delete Owner",//3
+                "Update a Owner",//4
+                "Return to Main Menu"//5
+            };
 
-            while (selection != 8)
+            var selection = PrintMenu(menuItems);
+            while (selection != 9)
             {
                 switch (selection)
                 {
-                    // Get a list of all pets
                     case 1:
-                        var pets = _petService.GetAllPets();
-                        ShowPets(pets);
+                        var pets = _petService.GetPets();
+                        PrintPets(pets);
                         break;
-                        //Search for at pet type
                     case 2:
-                        var searchType = PrintFintPetByType();
-                        var result =_petService.FindPetByType(searchType);
-                        foreach (var searchPet in result)
-                        {
-                            Console.WriteLine($"Id: {searchPet.Id} Name: { searchPet.Name}  Type: {searchPet.Type} BirthDate: {searchPet.BirthDate} SoldDate: {searchPet.SoldDate} Color: {searchPet.Color} PreviousOwner: {searchPet.PreviousOwner} Price: {searchPet.Price}");
-                        }
-
-                        break;
-
-                        //Add a new pet
-                    case 3:
-                        var name = AskQuestion("Name: ");
-
-                        var type = AskQuestion("Type: ");
-
-                        var birthDate = AskQuestion("Birthdate: ");
-
-                        var soldDate = AskQuestion("Solddate: ");
-
-                        var color = AskQuestion("Color: ");
-
+                        var petName = AskQuestion("Pet name: ");
+                        var type = AskQuestion("Pet Type: ");
+                        var birthDate = AskQuestion("Pet Birthdate: ");
+                        var soldDate = AskQuestion("Pet Sold Date: ");
+                        var color = AskQuestion("Pet Color: ");
                         var previousOwner = AskQuestion("Previous owner: ");
-
-                        var price = AskQuestion("Price: ");
-
-                        var pet = _petService.NewPet
-                                             (name, 
-                                              type, 
-                                              Convert.ToDateTime(birthDate),
-                                              Convert.ToDateTime(soldDate), 
-                                              color,
-                                              previousOwner, 
-                                              Convert.ToDouble(price));
-                        
+                        var price = AskQuestion("Pet Price: ");
+                        var pet = _petService.NewPet(petName, type, Convert.ToDateTime(birthDate), Convert.ToDateTime(soldDate), color, previousOwner, Convert.ToDouble(price));
                         _petService.CreatePet(pet);
                         break;
-
-                        // Remove a pet
-
-                    case 4:
-                        var iDForDelete = PrintFindPetById();
-                        _petService.DeletePet(iDForDelete);
+                    case 3:
+                        var idToDelete = FindPetId();
+                        _petService.DeletePet(idToDelete);
                         break;
-
-                        //Edit a pet
-                    case 5:
-                        
-
-                        var idForEdit = PrintFindPetById();
-
+                    case 4:
+                        var idForEdit = FindPetId();
                         var petToEdit = _petService.FindPetById(idForEdit);
-
-                        var newName = AskQuestion("Name: ");
-
-                        var newType = AskQuestion("Type: ");
-
-                        var newBirthDate = AskQuestion("Birthdate: ");
-
-                        var newSoldDate = AskQuestion("Solddate: ");
-
-                        var newColor = AskQuestion("Color: ");
-
-                        var newPreviousOwner = AskQuestion("Previous owner: ");
-
+                        Console.WriteLine("Updating " + petToEdit.PetName + " " + petToEdit.PetType + " " + petToEdit.BirthDate + " " + petToEdit.SoldDate + " " + petToEdit.Color + " " + petToEdit.PreviousOwner + " " + petToEdit.Price);
+                        var newName = AskQuestion("Pet name: ");
+                        var newType = AskQuestion("Pet type: ");
+                        var newBirthDate = AskQuestion("Birhtdate: ");
+                        var newSoldDate = AskQuestion("Sold Date: ");
+                        var newColor = AskQuestion("Pet Color: ");
+                        var newPreviousOwner = AskQuestion("Previous Owner: ");
                         var newPrice = AskQuestion("Price: ");
-
                         _petService.UpdatePet(new Pet()
                         {
-                            Id = idForEdit,
-                            Name = newName,
-                            Type = newType,
+                            PetId = idForEdit,
+                            PetName = newName,
+                            PetType = newType,
                             BirthDate = Convert.ToDateTime(newBirthDate),
                             SoldDate = Convert.ToDateTime(newSoldDate),
                             Color = newColor,
@@ -125,178 +88,165 @@ namespace EASV.PetShop.ConsoleApp
                             Price = Convert.ToDouble(newPrice)
                         });
                         break;
-
-                        // Sort after price "Lowest first"
-                    case 6:
-                        var sortResult = _petService.SortByprice();
-
-                        foreach (var sortPet in sortResult)
+                    case 5:
+                        var typeToFind = FindPetType();
+                        var result = _petService.FindPetByType(typeToFind);
+                        foreach (var foundPets in result)
                         {
-                            Console.WriteLine($"Id: {sortPet.Id} | Name: { sortPet.Name} | Type: {sortPet.Type} | BirthDate: {sortPet.BirthDate} | SoldDate: {sortPet.SoldDate} | Color: {sortPet.Color} | PreviousOwner: {sortPet.PreviousOwner} | Price: {sortPet.Price}");
+                            Console.WriteLine(foundPets.PetName);
                         }
                         break;
-
-                        //Find the 5 cheapest
+                    case 6:
+                        var petByPrice = _petService.SortByPrice();
+                        PrintPets(petByPrice);
+                        break;
                     case 7:
-                        GetFiveCheapestPets();
+                        ShowCheapestPets();
+                        break;
+                    case 8:
+                        var ownerSelection = PrintOwnerMenu(ownerMenuItems);
+                        while (ownerSelection != 5)
+                        {
+                            switch (ownerSelection)
+                            {
+                                case 1:
+                                    var owners = _ownerService.GetOwners();
+                                    PrintOwners(owners);
+                                    break;
+                                case 2:
+                                    var firstName = AskQuestion("First name: ");
+                                    var lastName = AskQuestion("Last name: ");
+                                    var owner = _ownerService.NewOwner(firstName, lastName);
+                                    _ownerService.CreateOwner(owner);
+                                    break;
+                                case 3:
+                                    var ownerIdForEdit = FindOwnerId();
+                                    var ownerToEdit = _ownerService.FindOwnerById(ownerIdForEdit);
+                                    Console.WriteLine("Updating " + ownerToEdit.FirstName + " " + ownerToEdit.LastName);
+                                    var newFirstname = AskQuestion("Firstname: ");
+                                    var newLastname = AskQuestion("Lastname: ");
+                                    _ownerService.UpdateOwner(new Owner()
+                                    {
+                                        OwnerId = ownerIdForEdit,
+                                        FirstName = newFirstname,
+                                        LastName = newLastname
+                                    });
+                                    break;
+                                case 4:
+                                    var ownerIdToDelete = FindOwnerId();
+                                    _ownerService.DeleteOwner(ownerIdToDelete);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            ownerSelection = PrintOwnerMenu(ownerMenuItems);
+                            Console.Clear();
+                        }
                         break;
                     default:
                         break;
                 }
-                selection = PetMenu(menuEnhender);
+                selection = PrintMenu(menuItems);
+                Console.Clear();
             }
-            Console.WriteLine("Closing program...");
-
-
-            Console.ReadLine();
+            AskQuestion("Press enter to exit");
         }
 
-        private void GetFiveCheapestPets()
+
+
+        private void ShowCheapestPets()
         {
-            var list = _petService.GetFiveCheapest();
+            var list = _petService.Get5CheapestPets();
             foreach (var pet in list)
             {
-                Console.WriteLine($"Id: {pet.Id} | Name: { pet.Name} | Type: {pet.Type} | BirthDate: {pet.BirthDate} | SoldDate: {pet.SoldDate} | Color: {pet.Color} | PreviousOwner: {pet.PreviousOwner} | Price: {pet.Price}");
+                Console.WriteLine("Pet name: {0} Price: {1:N}", pet.PetName, pet.Price);
             }
         }
 
-        /*
-         *  Pre-added pets, "data" that will show up when initializing the program.
-         */
-        private void StartData()
+        private string FindPetType()
         {
-            var pet1 = new Pet()
-            {
-                Name = "pip",
-                Type = "Bird",
-                BirthDate = new DateTime(2013, 05, 08),
-                SoldDate = new DateTime(2019, 05, 09),
-                Color = "Black",
-                PreviousOwner = "Brian",
-                Price = 3500
-
-            };
-            _petService.CreatePet(pet1);
-
-            var pet2 = new Pet()
-            {
-                Name = "Brian",
-                Type = "Dog",
-                BirthDate = new DateTime(2013, 05, 08),
-                SoldDate = new DateTime(2015, 05, 09),
-                Color = "Pink",
-                PreviousOwner = "Ole",
-                Price = 7777
-                    
-            };
-            _petService.CreatePet(pet2);
-
-            var pet3 = new Pet()
-            {
-                Name = "Allan",
-                Type = "Dog",
-                BirthDate = new DateTime(2013, 05, 08),
-                SoldDate = new DateTime(2014, 05, 09),
-                Color = "Yellow",
-                PreviousOwner = "Ole",
-                Price = 2345
-
-            };
-            _petService.CreatePet(pet3);
-
-            var pet4 = new Pet()
-            {
-                Name = "Allan",
-                Type = "Horse",
-                BirthDate = new DateTime(2013, 05, 08),
-                SoldDate = new DateTime(2014, 05, 09),
-                Color = "Green",
-                PreviousOwner = "Ole",
-                Price = 2345
-
-            };
-            _petService.CreatePet(pet4);
-
-            var pet5 = new Pet()
-            {
-                Name = "Karl",
-                Type = "Goat",
-                BirthDate = new DateTime(2013, 05, 08),
-                SoldDate = new DateTime(2016, 05, 09),
-                Color = "Purple",
-                PreviousOwner = "Ole",
-                Price = 3333
-
-            };
-            _petService.CreatePet(pet5);
-
-            var pet6 = new Pet()
-            {
-                Name = "Otto",
-                Type = "Dog",
-                BirthDate = new DateTime(2013, 05, 08),
-                SoldDate = new DateTime(2017, 05, 09),
-                Color = "White",
-                PreviousOwner = "Ole",
-                Price = 9999
-
-            };
-            _petService.CreatePet(pet6);
+            Console.WriteLine("Insert Pet Type: ");
+            string type;
+            type = Console.ReadLine();
+            return type;
         }
 
-        int PrintFindPetById()
+        int FindPetId()
         {
-            Console.WriteLine("Type a pet ID ");
+            Console.WriteLine("Insert Pet Id: ");
             int id;
             while (!int.TryParse(Console.ReadLine(), out id))
             {
-                Console.WriteLine("Invalid ID");
+                Console.WriteLine("Please insert a number");
             }
-
             return id;
         }
-        string PrintFintPetByType()
+
+        int FindOwnerId()
         {
-            Console.WriteLine("Pet type: ");
-            string name = Console.ReadLine();
-            return name;
+            int id;
+            while (!int.TryParse(Console.ReadLine(), out id))
+            {
+                Console.WriteLine("Please insert number");
+            }
+            return id;
+        }
+
+        private void PrintPets(List<Pet> pets)
+        {
+            Console.WriteLine("\nList of Pets");
+            foreach (var Pet in pets)
+            {
+                Console.WriteLine($"Id: {Pet.PetId} Name: {Pet.PetName} " +
+                                  $"Type: {Pet.PetType} Birthdate: {Pet.BirthDate} " +
+                    $"SoldDate: {Pet.SoldDate} Color: {Pet.Color} " +
+                    $"Previous Owner {Pet.PreviousOwner} Price {Pet.Price}");
+            }
+        }
+        private void PrintOwners(List<Owner> owners)
+        {
+            Console.WriteLine("\nList of Owners");
+            foreach (var Owner in owners)
+            {
+                Console.WriteLine($"Id: {Owner.OwnerId} Name: {Owner.FirstName} {Owner.LastName}");
+            }
+        }
+
+        int PrintMenu(string[] menuItems)
+        {
+            Console.WriteLine("\nPetShop Menu\n");
+            Console.WriteLine("Please select a command\n");
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                Console.WriteLine((i + 1) + ":" + menuItems[i]);
+            }
+            int selection;
+            while (!int.TryParse(Console.ReadLine(), out selection) || selection < 1 || selection > 9)
+            {
+                Console.WriteLine("\nPlease input a valid command");
+            }
+            return selection;
+        }
+        int PrintOwnerMenu(string[] ownerMenuItems)
+        {
+            Console.WriteLine("\nPetShop Owner Menu\n");
+            Console.WriteLine("Please select a command\n");
+            for (int i = 0; i < ownerMenuItems.Length; i++)
+            {
+                Console.WriteLine((i + 1) + ":" + ownerMenuItems[i]);
+            }
+            int selection;
+            while (!int.TryParse(Console.ReadLine(), out selection) || selection < 1 || selection > 5)
+            {
+                Console.WriteLine("\nPlease input a valid command");
+            }
+            return selection;
         }
 
         string AskQuestion(string question)
         {
             Console.WriteLine(question);
             return Console.ReadLine();
-        }
-
-        private void ShowPets(List<Pet> pets)
-        {
-            Console.WriteLine("\nList of pets");
-            foreach (var pet in pets)
-            {
-                Console.WriteLine($"Id: {pet.Id} | Navn: {pet.Name} | Type: {pet.Type} " +
-                                  $"| Birthdate: {pet.BirthDate} | Solddate: {pet.SoldDate}" +
-                                  $" | Color: {pet.Color} | Previous Owner: {pet.PreviousOwner} | Price: {pet.Price}");
-            }
-            Console.WriteLine("_____________________________^ PETS LISTED ABOVE ^__________________________________");
-            Console.WriteLine("\n");
-        }
-        //UI
-        public static int PetMenu(string[] menuEnhender)
-        {
-            Console.WriteLine("Type a number: \n");
-
-            for (int i = 0; i < menuEnhender.Length; i++)
-            {
-                Console.WriteLine((i + 1) + ": " + menuEnhender[i]);
-            }
-            int selection;
-            while (!int.TryParse(Console.ReadLine(), out selection) || selection < 1 || selection > 8)
-            {
-                Console.WriteLine("That's not a valid number");
-            }
-            Console.WriteLine("Your selected numer: " + selection);
-            return selection;
-
         }
     }
 }
