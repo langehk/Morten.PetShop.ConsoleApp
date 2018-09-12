@@ -47,8 +47,11 @@ namespace EASV.PetShop.Core.ApplicationService.Services
         public Owner UpdateOwner(Owner owner)
         {
             var ownerUpdate = FindOwnerById(owner.OwnerId);
+
             ownerUpdate.FirstName = owner.FirstName;
+
             ownerUpdate.LastName = owner.LastName;
+
             return ownerUpdate;
         }
 

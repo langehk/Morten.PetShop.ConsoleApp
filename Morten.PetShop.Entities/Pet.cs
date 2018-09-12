@@ -37,6 +37,6 @@ namespace EASV.PetShop.Entities
             get;
             set;
         }
-
+        public Owner Owner { get; set; }
     }
 }

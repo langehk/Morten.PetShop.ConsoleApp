@@ -65,7 +65,12 @@ namespace EASV.PetRestAPI.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Owner> Delete(int id)
         {
-            return Ok($"owner with Id: {id} is Deleted");
+            var owner = _ownerService.DeleteOwner(id);
+            if (owner == null)
+            {
+                return StatusCode(404, "Did not find Pet with ID " + id);
+            }
+            return Ok($"Owner with Id: {id} is Deleted");
         }
     }
 }

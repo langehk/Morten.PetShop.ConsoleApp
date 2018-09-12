@@ -31,7 +31,11 @@ namespace EASV.PetShop.Infrastructure.Data
                 SoldDate = new DateTime(2014, 12, 12),
                 Color = "Green",
                 PreviousOwner = "Lars",
-                Price = 23000
+                Price = 23000,
+                Owner = new Owner()
+                {
+                    OwnerId = 1
+                }
             };
             Pets.Add(pet1);
 

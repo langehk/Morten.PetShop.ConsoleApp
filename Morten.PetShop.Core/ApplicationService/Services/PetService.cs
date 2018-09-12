@@ -10,10 +10,12 @@ namespace EASV.PetShop.Core.ApplicationService.Services
     public class PetService : IPetService
     {
         readonly IPetRepository _petRepo;
+        readonly IOwnerRepository _ownerRepo;
 
-        public PetService(IPetRepository petRepository)
+        public PetService(IPetRepository petRepository, IOwnerRepository ownerRepository)
         {
             _petRepo = petRepository;
+            _ownerRepo = ownerRepository;
         }
 
         public Pet CreatePet(Pet pet)
@@ -28,7 +30,11 @@ namespace EASV.PetShop.Core.ApplicationService.Services
 
         public Pet FindPetById(int id)
         {
-            return _petRepo.ReadById(id);
+            var pet = _petRepo.ReadById(id);
+            pet.Owner = _ownerRepo
+                .ReadById(pet.Owner.OwnerId);
+
+            return pet;
         }
 
         public List<Pet> FindPetByType(string type)
