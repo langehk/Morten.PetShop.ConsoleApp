@@ -66,6 +66,9 @@ namespace EASV.PetShop.Core.ApplicationService.Services
                 Color = color,
                 PreviousOwner = previousOwner,
                 Price = price
+                //Owner = new Owner() { OwnerId = ownerId,
+                    //FirstName = firstName,
+                    //LastName = lastName}
             };
             return pet;
         }
