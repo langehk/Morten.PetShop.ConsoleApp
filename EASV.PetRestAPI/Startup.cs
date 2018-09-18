@@ -35,7 +35,8 @@ namespace EASV.PetRestAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PetAppContext>(
-                opt => opt.UseInMemoryDatabase("ThaDB")
+                opt => opt
+                .UseSqlite("Data Source=petApp.db")
             );
 
             services.AddScoped<IPetRepository, PetRepository>();
@@ -44,7 +45,13 @@ namespace EASV.PetRestAPI
             services.AddScoped<IOwnerRepository, OwnerRepository>();
             services.AddScoped<IOwnerService, OwnerService>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling
+                       = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,8 +60,18 @@ namespace EASV.PetRestAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<PetAppContext>();
+                    DBInitializer.SeedDB(ctx);
+                }
+            }
+            else
+            {
+                app.UseHsts();
             }
 
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
