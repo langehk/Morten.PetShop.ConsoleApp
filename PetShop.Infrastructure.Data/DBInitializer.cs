@@ -19,8 +19,7 @@ namespace PetShop.Infrastructure.Data
                 SoldDate = new DateTime(2014, 12, 12),
                 Color = "Green",
                 PreviousOwner = "Lars",
-                Price = 23000,
-                Owner = new Owner()
+                Price = 23000
             }).Entity;
 
             var pet2 = ctx.Pets.Add(new Pet()
@@ -32,8 +31,7 @@ namespace PetShop.Infrastructure.Data
                 SoldDate = new DateTime(2014, 12, 12),
                 Color = "Green",
                 PreviousOwner = "Jan",
-                Price = 90999,
-                Owner = new Owner()
+                Price = 90999
             }).Entity;
 
 

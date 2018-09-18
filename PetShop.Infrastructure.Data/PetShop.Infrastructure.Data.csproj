@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <BaseDirectory>..\..\PetShop.Infrastructure.Data</BaseDirectory>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,11 +19,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\..\PetShop.Infrastructure.Data\Repositories\OwnerRepository.cs" />
-    <Compile Include="..\..\PetShop.Infrastructure.Data\Repositories\PetRepository.cs" />
-    <Compile Include="..\..\PetShop.Infrastructure.Data\PetAppContext.cs" />
-    <Compile Include="..\..\PetShop.Infrastructure.Data\DBInitializer.cs" />
   </ItemGroup>
 </Project>
