@@ -13,13 +13,15 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="2.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Design" Version="1.1.6" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Morten.PetShop.Entities\EASV.PetShop.Entities.csproj" />
     <ProjectReference Include="..\Morten.PetShop.Core\EASV.PetShop.Core.csproj" />
-    <ProjectReference Include="..\PetRepository\EASV.PetShop.Infrastructure.Data.csproj" />
-    <ProjectReference Include="..\Morten.PetShop.ConsoleApp\EASV.PetShop.ConsoleApp.csproj" />
+    <ProjectReference Include="..\PetRepository\PetShop.Infrastructure.Data\PetShop.Infrastructure.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Controllers\PetController.cs" />

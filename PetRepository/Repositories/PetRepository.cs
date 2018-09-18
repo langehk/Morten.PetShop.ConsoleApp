@@ -27,6 +27,8 @@ namespace EASV.PetShop.Infrastructure.Data.Repositories
                 }
             }
             return null;
+
+           
         }
 
         public Pet FindByType(string type)

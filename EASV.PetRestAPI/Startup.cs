@@ -16,10 +16,8 @@ using EASV.PetRestAPI.Models;
 using EASV.PetShop.Core.ApplicationService;
 using EASV.PetShop.Core.ApplicationService.Services;
 using EASV.PetShop.Core.DomainService;
-
-using EASV.PetShop.Infrastructure.Data.Repositories;
-using EASV.PetShop.Infrastructure.Data;
-using EASV.PetShop.ConsoleApp;
+using PetShop.Infrastructure.Data.Repositories;
+using PetShop.Infrastructure.Data;
 
 namespace EASV.PetRestAPI
 {
@@ -28,7 +26,7 @@ namespace EASV.PetRestAPI
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            FakeDB.InitData();
+            //FakeDB.InitData();
         }
 
         public IConfiguration Configuration { get; }
@@ -36,9 +34,13 @@ namespace EASV.PetRestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PetAppContext>(
+                opt => opt.UseInMemoryDatabase("ThaDB")
+            );
+
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IPetService, PetService>();
-            services.AddScoped<IPrinter, Printer>();
+            //services.AddScoped<IPrinter, Printer>();
             services.AddScoped<IOwnerRepository, OwnerRepository>();
             services.AddScoped<IOwnerService, OwnerService>();
 
