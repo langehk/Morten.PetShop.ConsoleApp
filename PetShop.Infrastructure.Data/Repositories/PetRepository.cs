@@ -13,12 +13,10 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public PetRepository(PetAppContext ctx)
         {
-            _ctx = ctx;      
+            _ctx = ctx;
         }
 
-        /*
-         *  Opretter et pet.
-         */
+
         public Pet Create(Pet pet)
         {
             var pe = _ctx.Pets.Add(pet).Entity;
@@ -28,14 +26,16 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Pet Delete(int id)
         {
-            throw new NotImplementedException();
+            var petRemoved = _ctx.Remove(new Pet { PetId = id }).Entity;
+            _ctx.SaveChanges();
+            return petRemoved;
         }
 
         public Pet ReadById(int id)
         {
             return _ctx.Pets
                        .FirstOrDefault(c => c.PetId == id);
-                        
+
         }
 
         public IEnumerable<Pet> ReadByPrice()
@@ -45,8 +45,23 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public IEnumerable<Pet> ReadByType(string type)
         {
-            throw new NotImplementedException();
+            var foundPetType = _ctx.Find(new Pet { PetType =type }).Entity;
+            _ctx.SaveChanges();
+            return foundPetType;
         }
+
+
+        //foreach (var petByType in FakeDB.Pets)
+        //{
+        //    if (petByType.PetType == type)
+        //    {
+        //        return petByType;
+        //    }
+        //}
+        //return null;
+
+
+
 
         public IEnumerable<Pet> ReadPets()
         {
@@ -59,3 +74,4 @@ namespace PetShop.Infrastructure.Data.Repositories
         }
     }
 }
+
