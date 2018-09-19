@@ -38,7 +38,7 @@ namespace EASV.PetShop.Entities
             set;
         }
 
-        public int CurrentOwnerId { get; set; }
+        //public int CurrentOwnerId { get; set; }
 
         public Owner PetOwner { get; set; }
     }

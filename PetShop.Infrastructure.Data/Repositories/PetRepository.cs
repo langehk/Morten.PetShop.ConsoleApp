@@ -35,8 +35,8 @@ namespace PetShop.Infrastructure.Data.Repositories
         public Pet ReadById(int id)
         {
             return _ctx.Pets
+                       .Include(p => p.PetOwner)
                        .FirstOrDefault(p => p.PetId == id);
-            
         }
 
         public Pet ReadyByIdIncludeOwners(int id)
@@ -78,6 +78,7 @@ namespace PetShop.Infrastructure.Data.Repositories
         public IEnumerable<Pet> ReadPets()
         {
             return _ctx.Pets;
+                
         }
 
         public Pet ReadByIdIncludeOwners(int id)
