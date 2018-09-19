@@ -7,5 +7,6 @@
   <ItemGroup>
     <Compile Remove="Morten.PetShop.Core\Class1.cs" />
     <Compile Remove="Morten.PetShop.Core\ApplicationService\IPetService.cs" />
+    <Compile Remove="PetOwner.cs" />
   </ItemGroup>
 </Project>
