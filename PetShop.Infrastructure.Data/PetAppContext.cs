@@ -6,9 +6,15 @@ namespace PetShop.Infrastructure.Data
 {
     public class PetAppContext : DbContext
     {
-        public PetAppContext(DbContextOptions<PetAppContext> opt): base(opt)
+        public PetAppContext(DbContextOptions<PetAppContext> opt): base(opt) {}
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<Pet>()
+                .HasOne<Owner>(p => p.PetOwner)
+                .WithMany(o => o.Pets);
+                
         }
 
         public  DbSet<Pet> Pets { get; set;}

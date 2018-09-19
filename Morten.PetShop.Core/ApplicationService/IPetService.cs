@@ -17,7 +17,10 @@ namespace EASV.PetShop.Core.ApplicationService
                    double price);
         Pet CreatePet(Pet pet);
 
+        Pet FindPetByIdIncludeOwners(int id);
+
         Pet DeletePet(int id);
+
         Pet FindPetById(int id);
 
         Pet UpdatePet(Pet petUpdate);

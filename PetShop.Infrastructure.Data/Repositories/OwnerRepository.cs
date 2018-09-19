@@ -33,7 +33,7 @@ namespace PetShop.Infrastructure.Data.Repositories
         public Owner ReadById(int id)
         {
             return _ctx.Owners
-                       .FirstOrDefault(c => c.OwnerId == id);
+                       .FirstOrDefault(o => o.OwnerId == id);
         }
 
         public IEnumerable<Owner> ReadOwners()

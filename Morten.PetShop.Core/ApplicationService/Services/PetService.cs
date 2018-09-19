@@ -30,19 +30,27 @@ namespace EASV.PetShop.Core.ApplicationService.Services
 
         public Pet FindPetById(int id)
         {
-            var pet = _petRepo.ReadById(id);
-            pet.Owner = _ownerRepo
-                .ReadById(pet.Owner.OwnerId);
-
-            return pet;
+            return _petRepo.ReadById(id);
         }
 
         public List<Pet> FindPetByType(string type)
         {
+
+            //return _petRepo.ReadByType(type);
+
             var list = _petRepo.ReadPets();
             var question = list.Where(pet => pet.PetType.Equals(type));
             question.OrderBy(pet => pet.PetType);
             return question.ToList();
+        }
+
+        public Pet FindPetByIdIncludeOwners(int id)
+        {
+           
+            var pet = _petRepo.ReadyByIdIncludeOwners(id);
+            return pet;
+
+           
         }
 
         public List<Pet> Get5CheapestPets()

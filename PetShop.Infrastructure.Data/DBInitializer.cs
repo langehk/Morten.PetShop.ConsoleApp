@@ -20,6 +20,10 @@ namespace PetShop.Infrastructure.Data
                 Color = "Green",
                 PreviousOwner = "Lars",
                 Price = 23000
+            //    PetOwner = new Owner
+            //    {
+            //        OwnerId = 1
+            //}
             }).Entity;
 
             var pet2 = ctx.Pets.Add(new Pet()
@@ -32,6 +36,10 @@ namespace PetShop.Infrastructure.Data
                 Color = "Green",
                 PreviousOwner = "Jan",
                 Price = 90999
+                //PetOwner = new Owner
+                //{
+                //    OwnerId = 2
+                //}
             }).Entity;
 
 
@@ -42,14 +50,12 @@ namespace PetShop.Infrastructure.Data
                 LastName = "Ibsen"
             });
 
-
-
-            //        OwnerId = 1
-            //    }
-            //};
-            //Pets.Add(pet1);
-            //}                       
-
+            var owner2 = ctx.Owners.Add(new Owner()
+            {
+                OwnerId = 2,
+                FirstName = "Ole",
+                LastName = "Larsen"
+            });
 
 
             ctx.SaveChanges();

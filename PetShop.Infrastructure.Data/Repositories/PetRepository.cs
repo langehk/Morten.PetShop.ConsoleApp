@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using EASV.PetShop.Core.DomainService;
 using EASV.PetShop.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace PetShop.Infrastructure.Data.Repositories
 {
@@ -34,8 +35,15 @@ namespace PetShop.Infrastructure.Data.Repositories
         public Pet ReadById(int id)
         {
             return _ctx.Pets
-                       .FirstOrDefault(c => c.PetId == id);
+                       .FirstOrDefault(p => p.PetId == id);
+            
+        }
 
+        public Pet ReadyByIdIncludeOwners(int id)
+        {
+            return _ctx.Pets
+                       .Include(p => p.PetOwner)
+                       .FirstOrDefault(p => p.PetId == id);
         }
 
         public IEnumerable<Pet> ReadByPrice()
@@ -45,9 +53,13 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public IEnumerable<Pet> ReadByType(string type)
         {
-            var foundPetType = _ctx.Find(new Pet { PetType =type }).Entity;
-            _ctx.SaveChanges();
-            return foundPetType;
+            //var foundPetType = _ctx
+            //    .Find(new Pet {PetType =type }).Entity;
+            //    _ctx.SaveChanges();
+
+            //return foundPetType;
+            return null;
+
         }
 
 
@@ -66,6 +78,13 @@ namespace PetShop.Infrastructure.Data.Repositories
         public IEnumerable<Pet> ReadPets()
         {
             return _ctx.Pets;
+        }
+
+        public Pet ReadByIdIncludeOwners(int id)
+        {
+            return _ctx.Pets
+                       .Include(p => p.PetOwner)
+                       .FirstOrDefault(p => p.PetId == id);
         }
 
         public Pet Update(Pet petUpdate)
