@@ -45,15 +45,17 @@ namespace EASV.PetShop.Core.ApplicationService.Services
             return owner;
         }
 
-        public Owner UpdateOwner(Owner owner)
+        public Owner UpdateOwner(Owner ownerUpdate)
         {
-            var ownerUpdate = FindOwnerById(owner.OwnerId);
+            //var ownerUpdate = FindOwnerById(owner.OwnerId);
 
-            ownerUpdate.FirstName = owner.FirstName;
+            //ownerUpdate.FirstName = owner.FirstName;
 
-            ownerUpdate.LastName = owner.LastName;
+            //ownerUpdate.LastName = owner.LastName;
 
-            return ownerUpdate;
+            //return ownerUpdate;
+
+            return _ownerRepo.Update(ownerUpdate);
         }
 
         public List<Owner> GetFilteredOwners(Filter filter)

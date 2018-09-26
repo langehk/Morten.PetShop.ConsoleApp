@@ -90,7 +90,19 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Pet Update(Pet petUpdate)
         {
-            throw new NotImplementedException();
+            _ctx.Attach(petUpdate).State = EntityState.Modified;
+            _ctx.SaveChanges();
+
+            foreach (var order in _ctx.Owners.Where(o => o.Pet.PetId == petUpdate.PetId))
+            {
+                if (!petUpdate.PetOwner.Exists(co => co.Id == owner.))
+                {
+                    order.Pet = null;
+                    _ctx.Entry(order).Reference(o => o.Pet).IsModified = true;
+                }
+            }
+            _ctx.SaveChanges();
+            return petUpdate;
         }
     }
 }

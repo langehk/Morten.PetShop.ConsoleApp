@@ -14,7 +14,8 @@ namespace EASV.PetShop.Core.ApplicationService
 
         Owner CreateOwner(Owner owner);
         Owner FindOwnerById(int id);
-        Owner UpdateOwner(Owner owner);
+        Owner UpdateOwner(Owner ownerUpdate);
+
         Owner DeleteOwner(int id);
     }
 }

@@ -38,7 +38,7 @@ namespace EASV.PetShop.Core.ApplicationService.Services
 
             //return _petRepo.ReadByType(type);
 
-            var list = _petRepo.ReadPets();
+            var list = _petRepo.ReadAll();
             var question = list.Where(pet => pet.PetType.Equals(type));
             question.OrderBy(pet => pet.PetType);
             return question.ToList();
@@ -55,12 +55,12 @@ namespace EASV.PetShop.Core.ApplicationService.Services
 
         public List<Pet> Get5CheapestPets()
         {
-            return _petRepo.ReadPets().OrderBy(pet => pet.Price).Take(5).ToList();
+            return _petRepo.ReadAll().OrderBy(pet => pet.Price).Take(5).ToList();
         }
 
         public List<Pet> GetPets()
         {
-            return _petRepo.ReadPets().ToList();
+            return _petRepo.ReadAll().ToList();
         }
 
         public Pet NewPet(string petName, string type, DateTime birthDate, DateTime soldDate, string color, string previousOwner, double price)
@@ -83,7 +83,7 @@ namespace EASV.PetShop.Core.ApplicationService.Services
 
         public List<Pet> SortByPrice()
         {
-            var list = _petRepo.ReadPets();
+            var list = _petRepo.ReadAll();
             var question = list.OrderBy(pet => pet.Price);
             return question.ToList();
 
@@ -91,15 +91,7 @@ namespace EASV.PetShop.Core.ApplicationService.Services
 
         public Pet UpdatePet(Pet petUpdate)
         {
-            var pet = FindPetById(petUpdate.PetId);
-            pet.PetName = petUpdate.PetName;
-            pet.PetType = petUpdate.PetType;
-            pet.BirthDate = petUpdate.BirthDate;
-            pet.SoldDate = petUpdate.SoldDate;
-            pet.Color = petUpdate.Color;
-            pet.PreviousOwner = petUpdate.PreviousOwner;
-            pet.Price = petUpdate.Price;
-            return pet;
+            return _petRepo.Update(petUpdate);
         }
     }
 }

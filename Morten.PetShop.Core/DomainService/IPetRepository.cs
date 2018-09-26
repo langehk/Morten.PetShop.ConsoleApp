@@ -4,10 +4,10 @@ using System.Text;
 using EASV.PetShop.Entities;
 
 namespace EASV.PetShop.Core.DomainService
-{
+{   
     public interface IPetRepository
     {
-        IEnumerable<Pet> ReadPets();
+        IEnumerable<Pet> ReadAll();
 
         Pet Create(Pet pet);
 

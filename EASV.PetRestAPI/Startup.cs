@@ -23,21 +23,39 @@ namespace EASV.PetRestAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+
+        private IConfiguration _conf { get; }
+
+        private IHostingEnvironment _env { get; set; }
+
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
-            //FakeDB.InitData();
+            _env = env;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            _conf = builder.Build();
         }
 
-        public IConfiguration Configuration { get; }
+
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PetAppContext>(
-                opt => opt
-                .UseSqlite("Data Source=petApp.db")
-            );
+            if (_env.IsDevelopment())
+            {
+                services.AddDbContext<PetAppContext>(
+                    opt => opt.UseSqlite("Data Source=customerApp.db"));
+            }
+            else if (_env.IsProduction())
+            {
+                services.AddDbContext<PetAppContext>(
+                    opt => opt
+                        .UseSqlServer(_conf.GetConnectionString("DefaultConnection")));
+            }
 
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IPetService, PetService>();
@@ -45,13 +63,15 @@ namespace EASV.PetRestAPI
             services.AddScoped<IOwnerRepository, OwnerRepository>();
             services.AddScoped<IOwnerService, OwnerService>();
 
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
 
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling
                        = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

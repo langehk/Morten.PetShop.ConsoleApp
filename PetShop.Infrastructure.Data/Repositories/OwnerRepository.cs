@@ -79,9 +79,16 @@ namespace PetShop.Infrastructure.Data.Repositories
         public Owner Update(Owner ownerUpdate)
         {
             _ctx.Attach(ownerUpdate).State = EntityState.Modified;
-            _ctx.Entry(ownerUpdate).Reference(o => o.Pet).IsModified = true;
             _ctx.SaveChanges();
-
+            foreach (var owner in _ctx.Owners.Where(o => o.Pet.PetId == ownerUpdate.OwnerId))
+            {
+                if (!petUpdate.Owners.Exists(ow => ow.Id == owner.Id))
+                {
+                    owner.Pet = null;
+                    _ctx.Entry(owner).Reference(o => o.Pet).IsModified = true;
+                }
+            }
+            _ctx.SaveChanges();
             return ownerUpdate;
         }
 
