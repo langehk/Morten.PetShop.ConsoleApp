@@ -7,11 +7,13 @@ namespace EASV.PetShop.Core.DomainService
 {
     public interface IOwnerRepository
     {
-        IEnumerable<Owner> ReadOwners();
+        
         Owner Create(Owner owner);
         Owner ReadById(int id);
         Owner Update(Owner owner);
         Owner Delete(int id);
+        IEnumerable<Owner> ReadAll(Filter filter = null);
+        int Count();
 
     }
 }

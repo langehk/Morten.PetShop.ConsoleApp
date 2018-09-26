@@ -13,7 +13,8 @@ namespace PetShop.Infrastructure.Data
         {
             modelBuilder.Entity<Pet>()
                 .HasOne<Owner>(p => p.PetOwner)
-                .WithMany(o => o.Pets);
+                .WithMany(o => o.Pets)
+                        .OnDelete(DeleteBehavior.SetNull);
                 
         }
 

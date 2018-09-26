@@ -11,6 +11,8 @@ namespace EASV.PetShop.Entities
 
         public List<Pet> Pets { get; set; }
 
+        public Pet Pet { get; set; }
+
         //public int CurrentPetId { get; set; }
 
         //public Pet  Pet { get; set; }

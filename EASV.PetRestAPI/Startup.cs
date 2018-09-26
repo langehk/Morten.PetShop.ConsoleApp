@@ -68,6 +68,11 @@ namespace EASV.PetRestAPI
             }
             else
             {
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<PetAppContext>();
+                    ctx.Database.EnsureCreated();
+                }
                 app.UseHsts();
             }
 

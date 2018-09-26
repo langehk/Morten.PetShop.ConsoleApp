@@ -8,7 +8,10 @@ namespace EASV.PetShop.Core.ApplicationService
     {
 
         List<Owner> GetOwners();
+        List<Owner> GetFilteredOwners(Filter filter);
+
         Owner NewOwner(string firstName, string lastName);
+
         Owner CreateOwner(Owner owner);
         Owner FindOwnerById(int id);
         Owner UpdateOwner(Owner owner);
