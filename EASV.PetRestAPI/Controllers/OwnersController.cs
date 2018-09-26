@@ -37,7 +37,8 @@ namespace EASV.PetRestAPI.Controllers
         public ActionResult<Owner> Get(int id)
         {
             if (id < 1) return BadRequest("Id must be larger than 0");
-            return _ownerService.FindOwnerById(id);
+
+            return Ok("Hej folkens");
         }
 
         // POST: api/Owners
