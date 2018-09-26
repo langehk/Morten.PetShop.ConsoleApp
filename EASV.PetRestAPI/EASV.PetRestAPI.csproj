@@ -27,4 +27,7 @@
     <Compile Remove="Controllers\PetController.cs" />
     <Compile Remove="Controllers\PetController.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="customerApp.db" />
+  </ItemGroup>
 </Project>
