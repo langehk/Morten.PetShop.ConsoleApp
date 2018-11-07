@@ -20,22 +20,18 @@ namespace EASV.PetRestAPI.Controllers
 
         // GET: api/Owners
         [HttpGet]
-        public ActionResult<IEnumerable<Owner>> Get([FromQuery] )//Filter filter)
+        public ActionResult<IEnumerable<Owner>> Get()
         {
-
-            try
-            {
-                return _ownerService.GetOwners();
-            }
+            return _ownerService.GetOwners();
            
             //try
             //{
             //    return _ownerService.GetFilteredOwners(filter);
             //}
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            //catch (Exception e)
+            //{
+            //    return BadRequest(e.Message);
+            //}
         }
 
         // GET: api/Owners/5
