@@ -84,6 +84,9 @@ namespace PetShop.Infrastructure.Data.Repositories
             return ownerUpdate;
         }
 
-      
+        public IEnumerable<Owner> ReadAll(Filter filter = null)
+        {
+            return _ctx.Owners;
+        }
     }
 }
