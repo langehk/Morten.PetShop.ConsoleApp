@@ -18,6 +18,9 @@ using EASV.PetShop.Core.ApplicationService.Services;
 using EASV.PetShop.Core.DomainService;
 using PetShop.Infrastructure.Data.Repositories;
 using PetShop.Infrastructure.Data;
+using EASV.PetRestAPI.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace EASV.PetRestAPI
 {
@@ -45,6 +48,26 @@ namespace EASV.PetRestAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add JWT based authentication
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = false,
+                    //ValidAudience = "TodoApiClient",
+                    ValidateIssuer = false,
+                    //ValidIssuer = "TodoApi",
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = JwtSecurityKey.Key,
+                    ValidateLifetime = true, //validate the expiration and not before values in the token
+                    ClockSkew = TimeSpan.FromMinutes(5) //5 minute tolerance for the expiration date
+                };
+            });
+
+            // Add CORS
+            services.AddCors();
+
+
             if (_env.IsDevelopment())
             {
                 services.AddDbContext<PetAppContext>(
@@ -97,6 +120,9 @@ namespace EASV.PetRestAPI
             }
 
             //app.UseHttpsRedirection();
+
+            app.UseAuthentication();
+
             app.UseMvc();
         }
     }
