@@ -19,19 +19,6 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         public Owner Create(Owner owner)
         {
-
-            //var changeTracker = _ctx.ChangeTracker.Entries<Owner>();
-            //if (owner.Pet != null && 
-            //    _ctx.ChangeTracker.Entries<Owner>()
-            //    .FirstOrDefault(ce => ce.Entity.OwnerId == owner.Pet.PetId) == null)
-            //{
-            //    _ctx.Attach(owner.Pet);
-            //}
-
-            //var ow = _ctx.Owners.Add(owner).Entity;
-            //_ctx.SaveChanges();
-            //return ow;
-
             _ctx.Attach(owner).State = EntityState.Added;
             _ctx.SaveChanges();
             return owner;
@@ -56,19 +43,24 @@ namespace PetShop.Infrastructure.Data.Repositories
 
         //https://localhost:5001/api/owners?CurrentPage=1&ItemsPrPage=10
 
-        public IEnumerable<Owner> ReadAll(Filter filter)
+        public IEnumerable<Owner> ReadAll()
         {
+            return _ctx.Owners;
+        }
+
+        //public IEnumerable<Owner> ReadAll(Filter filter)
+        //{
             
 
-            if (filter == null)
-            {
-                return _ctx.Owners;
-            }
-            return _ctx.Owners
-               .Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
-               .Take(filter.ItemsPrPage);
+        //    if (filter == null)
+        //    {
+        //        return _ctx.Owners;
+        //    }
+        //    return _ctx.Owners
+        //       .Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
+        //       .Take(filter.ItemsPrPage);
            
-        }
+        //}
 
         public int Count()
         {
