@@ -82,7 +82,7 @@ namespace EASV.PetRestAPI.Controllers
                                null, // audience - not needed (ValidateAudience = false)
                                claims.ToArray(),
                                DateTime.Now,               // notBefore
-                               DateTime.Now.AddMinutes(10)));  // expires
+                               DateTime.Now.AddMinutes(10)));  // how long time before the token expires. 
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

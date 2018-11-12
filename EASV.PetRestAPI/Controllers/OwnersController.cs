@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EASV.PetShop.Core.ApplicationService;
 using EASV.PetShop.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -19,6 +20,7 @@ namespace EASV.PetRestAPI.Controllers
         }
 
         // GET: api/Owners
+        [Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<Owner>> Get()
         {
@@ -27,6 +29,7 @@ namespace EASV.PetRestAPI.Controllers
         }
 
         // GET: api/Owners/5
+        [Authorize(Roles = "Administrator")]
         [HttpGet("{id}", Name = "Get")]
         public ActionResult<Owner> Get(int id)
         {
