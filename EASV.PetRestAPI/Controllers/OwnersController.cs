@@ -39,6 +39,7 @@ namespace EASV.PetRestAPI.Controllers
         }
 
         // POST: api/Owners
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult<Owner> Post([FromBody] Owner owner)
         {
@@ -54,6 +55,7 @@ namespace EASV.PetRestAPI.Controllers
         }
 
         // PUT: api/Owners/5
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public ActionResult<Owner> Put(int id, [FromBody] Owner owner)
         {
@@ -67,6 +69,7 @@ namespace EASV.PetRestAPI.Controllers
        
 
         // DELETE api/owners/5
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public ActionResult<Owner> Delete(int id)
         {
