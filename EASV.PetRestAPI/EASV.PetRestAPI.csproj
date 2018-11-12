@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="wwwroot\" />
     <Folder Include="Models\" />
-    <Folder Include="Data\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
 
@@ -28,6 +27,8 @@
   <ItemGroup>
     <Compile Remove="Controllers\PetController.cs" />
     <Compile Remove="Controllers\PetController.cs" />
+    <Compile Remove="Data\TodoContext.cs" />
+    <Compile Remove="Data\DbInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="customerApp.db" />

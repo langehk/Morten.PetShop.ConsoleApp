@@ -1,15 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EASV.PetShop.Entities;
+using Microsoft.EntityFrameworkCore;
+using PetShop.Infrastructure.Data;
 using System.Collections.Generic;
 using System.Linq;
-using EASV.PetRestAPI.Models;
+
 
 namespace EASV.PetRestAPI.Data
 {
-    public class UserRepository : IRepository<User>
+    public class UserRepository : IUserRepository<User>
     {
-        private readonly TodoContext db;
+        private readonly PetAppContext db;
 
-        public UserRepository(TodoContext context)
+        public UserRepository(PetAppContext context)
         {
             db = context;
         }

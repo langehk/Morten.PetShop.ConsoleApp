@@ -8,15 +8,16 @@ using EASV.PetRestAPI.Models;
 using EASV.PetRestAPI.Helpers;
 using System.Linq;
 using System.Collections.Generic;
+using EASV.PetShop.Entities;
 
 namespace EASV.PetRestAPI.Controllers
 {
     [Route("/token")]
     public class TokenController : Controller
     {
-        private readonly IRepository<User> repository;
+        private readonly IUserRepository<User> repository;
 
-        public TokenController(IRepository<User> repos)
+        public TokenController(IUserRepository<User> repos)
         {
             repository = repos;
         }

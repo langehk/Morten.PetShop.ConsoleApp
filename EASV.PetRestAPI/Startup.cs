@@ -21,6 +21,8 @@ using PetShop.Infrastructure.Data;
 using EASV.PetRestAPI.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using EASV.PetRestAPI.Data;
+using EASV.PetShop.Entities;
 
 namespace EASV.PetRestAPI
 {
@@ -40,6 +42,8 @@ namespace EASV.PetRestAPI
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             _conf = builder.Build();
+
+            JwtSecurityKey.SetSecret("a secret that needs to be at least 16 characters long");
         }
 
 
@@ -85,7 +89,7 @@ namespace EASV.PetRestAPI
             //services.AddScoped<IPrinter, Printer>();
             services.AddScoped<IOwnerRepository, OwnerRepository>();
             services.AddScoped<IOwnerService, OwnerService>();
-
+            services.AddScoped<IUserRepository<User>, UserRepository>();
 
 
             services.AddMvc().AddJsonOptions(options =>
@@ -119,7 +123,11 @@ namespace EASV.PetRestAPI
                 app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
+
+            // Enable CORS (must precede app.UseMvc()):
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
 
             app.UseAuthentication();
 

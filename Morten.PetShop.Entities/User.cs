@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EASV.PetRestAPI.Models
+namespace EASV.PetShop.Entities
 {
     public class User
     {

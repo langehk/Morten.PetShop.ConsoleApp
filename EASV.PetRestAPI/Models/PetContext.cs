@@ -1,4 +1,5 @@
 ﻿using System;
+using EASV.PetShop.Entities;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -11,6 +12,7 @@ namespace EASV.PetRestAPI.Models
         {
         }
 
+        public DbSet<User> Users { get; set; }
         public DbSet<PetItem> PetItems { get; set; }
 
     }

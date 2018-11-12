@@ -3,7 +3,7 @@
 
 namespace EASV.PetRestAPI.Data
 {
-    public interface IRepository<T>
+    public interface IUserRepository<T>
     {
         IEnumerable<T> GetAll();
         T Get(long id);

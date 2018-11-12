@@ -26,5 +26,6 @@
     <Compile Include="..\..\PetShop.Infrastructure.Data\Repositories\PetRepository.cs" />
     <Compile Include="..\..\PetShop.Infrastructure.Data\PetAppContext.cs" />
     <Compile Include="..\..\PetShop.Infrastructure.Data\DBInitializer.cs" />
+    <Compile Include="..\..\PetShop.Infrastructure.Data\Repositories\UserRepository.cs" />
   </ItemGroup>
 </Project>
