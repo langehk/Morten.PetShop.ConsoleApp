@@ -20,7 +20,7 @@ namespace EASV.PetRestAPI.Controllers
         }
 
         // GET: api/Owners
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public ActionResult<IEnumerable<Owner>> Get()
         {
@@ -29,7 +29,7 @@ namespace EASV.PetRestAPI.Controllers
         }
 
         // GET: api/Owners/5
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         [HttpGet("{id}", Name = "Get")]
         public ActionResult<Owner> Get(int id)
         {
@@ -39,7 +39,7 @@ namespace EASV.PetRestAPI.Controllers
         }
 
         // POST: api/Owners
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult<Owner> Post([FromBody] Owner owner)
         {
@@ -55,7 +55,7 @@ namespace EASV.PetRestAPI.Controllers
         }
 
         // PUT: api/Owners/5
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public ActionResult<Owner> Put(int id, [FromBody] Owner owner)
         {
@@ -69,7 +69,7 @@ namespace EASV.PetRestAPI.Controllers
        
 
         // DELETE api/owners/5
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public ActionResult<Owner> Delete(int id)
         {
